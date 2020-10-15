@@ -14,7 +14,7 @@ const NavbarContainer = () => {
     return (
         <>
             <Navbar sticky="top" bg="light" variant="light" className="navbar">
-                <Navbar.Brand className="mr-auto logo-nav">UNC Scheule Tracker</Navbar.Brand>
+                <Navbar.Brand className="mr-auto logo-nav">UNC Schedule Tracker</Navbar.Brand>
                 <Nav className="mx-auto">
                     <Nav.Link as={Link} to="/">Home</Nav.Link>
                     <Nav.Link as={Link} to="about">About</Nav.Link>
