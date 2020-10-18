@@ -10,11 +10,16 @@ const Home = () => {
             <h4>How you can use this app</h4>
             <ul>
                 <li>
-                    Organize your schedules for your remaining time at Carolina
+                    Organize your schedule for your remaining time at Carolina
                 </li>
                 <li>
-                    Check your progress within a major or gen ed category
+                    Check your progress within a major or gen ed category:
+                    <ul>
+                        <li>COMP</li>
+                        </ul>
                 </li>
+                <li>Find classes that satisfy given requirements</li>
+                <li>Discover major-specific electives</li>
             </ul>
         </div>
         </>
