@@ -17,11 +17,11 @@ const NavbarContainer = () => {
                 <Navbar.Brand className="mr-auto logo-nav">UNC Schedule Tracker</Navbar.Brand>
                 <Nav className="mx-auto">
                     <Nav.Link as={Link} to="/">Home</Nav.Link>
-                    <Nav.Link as={Link} to="about">About</Nav.Link>
-                    <Nav.Link as={Link} to="schedule">My Schedule</Nav.Link>
-                    <Nav.Link as={Link} to="settings">Settings</Nav.Link>
+                    <Nav.Link as={Link} to="/about">About</Nav.Link>
+                    <Nav.Link as={Link} to="/schedule">Scheduler</Nav.Link>
+                    <Nav.Link as={Link} to="/settings">Settings</Nav.Link>
                 </Nav>
-                <Button as={Link} to="login" variant="dark" className="ml-auto">Login</Button>
+                <Button as={Link} to="/login" variant="dark" className="ml-auto">Login</Button>
             </Navbar>
             <Switch>
                 <Route exact path="/" component={Home}/>
