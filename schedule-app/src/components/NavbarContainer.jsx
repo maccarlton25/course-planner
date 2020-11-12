@@ -8,6 +8,7 @@ import About from '../pages/About.jsx';
 import Login from '../pages/Login.jsx';
 import Schedule from '../pages/Schedule.jsx';
 import Settings from '../pages/Settings.jsx';
+import Signup from '../pages/Signup.jsx';
 
 const NavbarContainer = () => {
 
@@ -22,6 +23,7 @@ const NavbarContainer = () => {
                     <Nav.Link as={Link} to="/settings">Settings</Nav.Link>
                 </Nav>
                 <Button as={Link} to="/login" variant="dark" className="ml-auto">Login</Button>
+                <Button as={Link} to="/signup" variant="" className="">Sign Up</Button>
             </Navbar>
             <Switch>
                 <Route exact path="/" component={Home}/>
@@ -29,6 +31,7 @@ const NavbarContainer = () => {
                 <Route exact path="/schedule" component={Schedule}/>
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/settings" component={Settings}/>
+                <Route exact path="/signup" component={Signup}/>
             </Switch>
         </>
     )
