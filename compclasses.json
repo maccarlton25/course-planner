@@ -1,311 +1,341 @@
 {
-    "courses": [{
-        "dept": "COMP",
-        "code": 110,
-        "name": "Introduction to Programming",
-        "description": "An introduction to programming. Fundamental programming skills, typically using Java or JavaScript. Problem analysis and algorithm design. Students may not receive credit for both COMP 110 and COMP 116. Students may not receive credit for this course after receiving credit for COMP 116 or higher. Honors version available",
-        "prereq": [
-            "COMP101|MATH231"
-        ],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 116,
-        "name": "Introduction to Scientific Programming",
-        "description": "An introduction to programming for computationally oriented scientists.Fundamental programming skills, typically using MATLAB or Python.Problem analysis and algorithm design with examples drawn from simple numerical and discrete problems.Students can receive credit for only one of COMP 110 and 116. ",
-        "prereq": [
-            "MATH231|MATH241"
-        ],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 126,
-        "name": "Practical Web Design and Development for Everyone",
-        "description": "A ground - up introduction to current principles, standards, and best practice in website design, usability, accessibility, development, and management through project - based skills development in HTML5, CSS, and basic JavaScript. Intended for nonmajors.",
-        "prereq": [],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 210,
-        "name": "Data Structures and Analysis",
-        "description": "This course will teach you how to organize the data used in computer programs so that manipulation of that data can be done efficiently on large problems and large data instances.Rather than learning to use the data structures found in the libraries of programming languages, you will be learning how those libraries are constructed, and why the items that are included in them are there(and why some are excluded).",
-        "prereq": [
-            "COMP110",
-            "MATH231"
-        ],
-        "req": [
-            "COMP283|MATH381"
-        ],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 211,
-        "name": "Systems Fundamentals",
-        "description": "This is the first course in the introductory systems sequence.Students enter the course having taken an introductory programming course in a high - level programming language(COMP 110) and a course in discrete structures.The overarching goal is to bridge the gap between a students ' knowledge of a high-level programming language (COMP 110) and computer organization (COMP 311).",
-        "prereq": [
-            "COMP210",
-            "COMP283|MATH381"
-        ],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 283,
-        "name": "Discrete Structures",
-        "description": "Introduces discrete structures (sets, tuples, relations, functions, graphs, trees) and the formal mathematics (logic, proof, induction) used to establish their properties and those of algorithms that work with them. Develops problem-solving skills through puzzles and applications central to computer science. Honors version available",
-        "prereq": [],
-        "req": ["MATH231|MATH241"],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 290,
-        "name": "Special Topics in Computer Science",
-        "description": "Non-technical topics in computer science for computer science majors. May not be used to satisfy any degree requirements for a computer science major. This course has variable content and may be taken multiple times for credit.",
-        "prereq": [],
-        "req": [],
-        "hours": 1
-    }, {
-        "dept": "COMP",
-        "code": 301,
-        "name": "Foundations of Programming",
-        "description": "Students will learn how to reason about how their code is structured, identify whether a given structure is effective in a given context, and look at ways of organizing units of code that support larger programs. In a nutshell, the primary goal of the course is to equip students with tools and techniques that will help them not only in later courses in the major but also in their careers afterwards.",
-        "prereq": ["COMP210", "COMP283|MATH381"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 311,
-        "name": "Computer Organization",
-        "description": "Introduction to computer organization and design. Students will be introduced to the conceptual design of a basic microprocessor, along with assembly programming. The course includes fundamental concepts such as binary numbers, binary arithmetic, and representing information as well as instructions. Students learn to program in assembly (i.e., machine) language. The course covers the fundamentals of computer hardware design, transistors and logic gates, progressing through basic combinational and sequential components, culminating in the conceptual design CPU.",
-        "prereq": ["COMP211"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 380,
-        "name": "Introduction to Digital Culture",
-        "description": "An introduction to digital technology and computer science issues in society. Topics may include Internet history, privacy, security, usability, graphics, games, computers in the media, development, economics, social media, AI, IP, computer and Internet ethics, global ethics, current legal issues, etc. Honors version available",
-        "prereq": [],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 390,
-        "name": "Computer Science Elective Topics",
-        "description": "Elective topics in computer science for computer science majors. May not be used to satisfy any degree requirements for a computer science major. This course has variable content and may be taken multiple times for credit.",
-        "prereq": [],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 401,
-        "name": "Foundation of Programming",
-        "description": "Required preparation, a first formal course in computer programming (e.g., COMP 110, COMP 116). Advanced programming: object-oriented design, classes, interfaces, packages, inheritance, delegation, observers, MVC (model view controller), exceptions, assertions. Students may not receive credit for this course after receiving credit for COMP 301. Honors version available",
-        "prereq": ["MATH231|MATH241"],
-        "req": [],
-        "hours": 4
-    }, {
-        "dept": "COMP",
-        "code": 410,
-        "name": "Data Structures",
-        "description": "The analysis of data structures and their associated algorithms. Abstract data types, lists, stacks, queues, trees, and graphs. Sorting, searching, hashing. Students may not receive credit for this course after receiving credit for COMP 210.",
-        "prereq": ["MATH231|MATH241", "COMP401"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 411,
-        "name": "Computer Organization",
-        "description": "Digital logic, circuit components. Data representation, computer architecture and implementation, assembly language programming. Students may not receive credit for this course after receiving credit for COMP 311.",
-        "prereq": ["MATH231|MATH241", "COMP401"],
-        "req": [],
-        "hours": 4
-    }, {
-        "dept": "COMP",
-        "code": 426,
-        "name": "Modern Web Programming",
-        "description": "Developing applications for the World Wide Web including both client-side and server-side programming. Emphasis on Model-View-Controller architecture, AJAX, RESTful Web services, and database interaction.",
-        "prereq": ["COMP211&COMP301|COMP401&COMP410"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 431,
-        "name": "Internet Services and Protocols",
-        "description": "Application-level protocols HTTP, SMTP, FTP, transport protocols TCP and UDP, and the network-level protocol IP. Internet architecture, naming, addressing, routing, and DNS. Sockets programming. Physical-layer technologies. Ethernet, ATM, and wireless.",
-        "prereq": ["COMP210&COMP211&COMP301|COMP401&COMP410&COMP411"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 455,
-        "name": "Models of Languages and Computation",
-        "description": "Introduction to the theory of computation. Finite automata, regular languages, pushdown automata, context-free languages, and Turing machines. Undecidable problems.",
-        "prereq": ["COMP110|COMP166|COMP401", "COMP283|MATH381"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 488,
-        "name": "Data Science in the Business World",
-        "description": "Students will acquire hands-on data science skills enabling them to solve real-world business problems. Since data science is an interdisciplinary field, business and computer science students learn and work together in this course. Leveraging each other's skills and knowledge, students create data-driven business insights using modern analytics.",
-        "prereq": [],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 495,
-        "name": "Mentored Research in Computer Science",
-        "description": "Independent research conducted under the direct mentorship of a computer science faculty member. This course cannot be counted toward the completion of the major or minor. For computer science majors only. Permission of instructor required.",
-        "prereq": [],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 496,
-        "name": "Independent Study in Computer Science",
-        "description": "Permission of the department. Computer science majors only. For advanced majors in computer science who wish to conduct an independent study or research project with a faculty supervisor. May be taken repeatedly for up to a total of six credit hours.",
-        "prereq": [],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 672,
-        "name": "Simulation Modeling and Analysis",
-        "description": "Introduces students to modeling, programming, and statistical analysis applicable to computer simulations. Emphasizes statistical analysis of simulation output for decision-making. Focuses on discrete-event simulations and discusses other simulation methodologies such as Monte Carlo and agent-based simulations. Students model, program, and run simulations using specialized software. Familiarity with computer programming recommended.",
-        "prereq": [],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 662,
-        "name": "Scientific Computation II",
-        "description": "Theory and practical issues arising in linear algebra problems derived from physical applications, e.g., discretization of ODEs and PDEs. Linear systems, linear least squares, eigenvalue problems, singular value decomposition.",
-        "prereq": [],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 590,
-        "name": "Topics in Computer Science",
-        "description": "Permission of the instructor. This course has variable content and may be taken multiple times for credit. Different sections may be taken in the same semester. Honors version available",
-        "prereq": [],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 585,
-        "name": "Serious Games",
-        "description": "Concepts of computer game development and their application beyond entertainment to fields such as education, health, and business. Course includes team development of a game. Honors version available",
-        "prereq": ["COMP210&COMP211&COMP301&COMP311|COMP401&COMP410&COMP411"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 581,
-        "name": "COMP",
-        "description": "Hands-on introduction to robotics with a focus on the computational aspects. Students will build and program mobile robots. Topics include kinematics, actuation, sensing, configuration spaces, control, and motion planning. Applications include industrial, mobile, personal, and medical robots. Honors version available",
-        "prereq": ["COMP210&COMP211&COMP301&COMP311|COMP401&COMP410&COMP411"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 576,
-        "name": "Mathematics for Image Computing",
-        "description": "Mathematics relevant to image processing and analysis using real image computing objectives and provided by computer implementations.",
-        "prereq": ["COMP116|COMP210|COMP401"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 572,
-        "name": "Computational Photography",
-        "description": "The course provides a hands on introduction to techniques in computational photography--the process of digitally recording light and then performing computational manipulations on those measurements to produce an image or other representation. The course includes an introduction to relevant concepts in computer vision and computer graphics.",
-        "prereq": ["COMP401&COMP410"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 562,
-        "name": "Introduction to Machine Learning",
-        "description": "Machine learning as applied to speech recognition, tracking, collaborative filtering and recommendation systems. Classification, regression, support vector machines, hidden Markov models, principal component analysis, and deep learning.",
-        "prereq": ["COMP401&COMP410"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 560,
-        "name": "Artificial Intelligence",
-        "description": "Introduction to techniques and applications of modern artificial intelligence. Combinatorial search, probabilistic models and reasoning, and applications to natural language understanding, robotics, and computer vision.",
-        "prereq": ["COMP210&COMP211&COMP301|COMP401&COMP410"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 555,
-        "name": "Bioalgorithms",
-        "description": "Bioinformatics algorithms. Topics include DNA restriction mapping, finding regulatory motifs, genome rearrangements, sequence alignments, gene prediction, graph algorithms, DNA sequencing, protein sequencing, combinatorial pattern matching, approximate pattern matching, clustering and evolution, tree construction, Hidden Markov Models, randomized algorithms.",
-        "prereq": ["COMP401&COMP410"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 550,
-        "name": "Algorithms and Analysis",
-        "description": "Formal specification and verification of programs. Techniques of algorithm analysis. Problem-solving paradigms. Survey of selected algorithms.",
-        "prereq": ["COMP210&COMP211&COMP301|COMP 410"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 541,
-        "name": "Digital Logic and Computer Design",
-        "description": "This course is an introduction to digital logic as well as the structure and electronic design of modern processors. Students will implement a working computer during the laboratory sessions.",
-        "prereq": ["COMP210&COMP211&COMP301&COMP311|COMP401&COMP410&COMP411"],
-        "req": [],
-        "hours": 4
-    }, {
-        "dept": "COMP",
-        "code": 533,
-        "name": "Distributed Systems",
-        "description": "Distributed systems and their goals; resource naming, synchronization of distributed processes; consistency and replication; fault tolerance; security and trust; distributed object-based systems; distributed file systems; distributed Web-based systems; and peer-to-peer systems.",
-        "prereq": ["COMP431|COMP524|COMP530"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 524,
-        "name": "Programming Language Concepts",
-        "description": "Concepts of high-level programming and their realization in specific languages. Data types, scope, control structures, procedural abstraction, classes, concurrency. Run-time implementation.",
-        "prereq": ["COMP210&COMP211&COMP301&COMP311&COMP455|COMP401&COMP410&COMP411&COMP455"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 523,
-        "name": "Software Engineering Laboratory",
-        "description": "Organization and scheduling of software engineering projects, structured programming, and design. Each team designs, codes, and debugs program components and synthesizes them into a tested, documented program product.",
-        "prereq": ["COMP210&COMP211&COMP301&COMP311|COMP401&COMP410&COMP411"],
-        "req": [],
-        "hours": 4
-    }, {
-        "dept": "COMP",
-        "code": 521,
-        "name": "Files and Databases",
-        "description": "Placement of data on secondary storage. File organization. Database history, practice, major models, system structure and design.",
-        "prereq": ["COMP210&COMP211&COMP301|COMP401&COMP410&COMP411"],
-        "req": [],
-        "hours": 3
-    }, {
-        "dept": "COMP",
-        "code": 520,
-        "name": "Compilers",
-        "description": "Design and construction of compilers. Theory and pragmatics of lexical, syntactic, and semantic analysis. Interpretation. Code generation for a modern architecture. Run-time environments. Includes a large compiler implementation project.",
-        "prereq": ["COMP210&COMP211&COMP301&COMP311&COMP455|COMP401&COMP410&COMP411&COMP455"],
-        "req": [],
-        "hours": 3
-    }]
+  "courses": [
+    {
+      "dept": "COMP",
+      "code": 110,
+      "name": "Introduction to Programming",
+      "description": "An introduction to programming. Fundamental programming skills, typically using Java or JavaScript. Problem analysis and algorithm design. Students may not receive credit for both COMP 110 and COMP 116. Students may not receive credit for this course after receiving credit for COMP 116 or higher. Honors version available",
+      "prereq": ["COMP101|MATH231"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 116,
+      "name": "Introduction to Scientific Programming",
+      "description": "An introduction to programming for computationally oriented scientists.Fundamental programming skills, typically using MATLAB or Python.Problem analysis and algorithm design with examples drawn from simple numerical and discrete problems.Students can receive credit for only one of COMP 110 and 116. ",
+      "prereq": ["MATH231|MATH241"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 126,
+      "name": "Practical Web Design and Development for Everyone",
+      "description": "A ground - up introduction to current principles, standards, and best practice in website design, usability, accessibility, development, and management through project - based skills development in HTML5, CSS, and basic JavaScript. Intended for nonmajors.",
+      "prereq": [],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 210,
+      "name": "Data Structures and Analysis",
+      "description": "This course will teach you how to organize the data used in computer programs so that manipulation of that data can be done efficiently on large problems and large data instances.Rather than learning to use the data structures found in the libraries of programming languages, you will be learning how those libraries are constructed, and why the items that are included in them are there(and why some are excluded).",
+      "prereq": ["COMP110", "MATH231"],
+      "req": ["COMP283|MATH381"],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 211,
+      "name": "Systems Fundamentals",
+      "description": "This is the first course in the introductory systems sequence.Students enter the course having taken an introductory programming course in a high - level programming language(COMP 110) and a course in discrete structures.The overarching goal is to bridge the gap between a students ' knowledge of a high-level programming language (COMP 110) and computer organization (COMP 311).",
+      "prereq": ["COMP210", "COMP283|MATH381"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 283,
+      "name": "Discrete Structures",
+      "description": "Introduces discrete structures (sets, tuples, relations, functions, graphs, trees) and the formal mathematics (logic, proof, induction) used to establish their properties and those of algorithms that work with them. Develops problem-solving skills through puzzles and applications central to computer science. Honors version available",
+      "prereq": [],
+      "req": ["MATH231|MATH241"],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 290,
+      "name": "Special Topics in Computer Science",
+      "description": "Non-technical topics in computer science for computer science majors. May not be used to satisfy any degree requirements for a computer science major. This course has variable content and may be taken multiple times for credit.",
+      "prereq": [],
+      "req": [],
+      "hours": 1
+    },
+    {
+      "dept": "COMP",
+      "code": 301,
+      "name": "Foundations of Programming",
+      "description": "Students will learn how to reason about how their code is structured, identify whether a given structure is effective in a given context, and look at ways of organizing units of code that support larger programs. In a nutshell, the primary goal of the course is to equip students with tools and techniques that will help them not only in later courses in the major but also in their careers afterwards.",
+      "prereq": ["COMP210", "COMP283|MATH381"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 311,
+      "name": "Computer Organization",
+      "description": "Introduction to computer organization and design. Students will be introduced to the conceptual design of a basic microprocessor, along with assembly programming. The course includes fundamental concepts such as binary numbers, binary arithmetic, and representing information as well as instructions. Students learn to program in assembly (i.e., machine) language. The course covers the fundamentals of computer hardware design, transistors and logic gates, progressing through basic combinational and sequential components, culminating in the conceptual design CPU.",
+      "prereq": ["COMP211"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 380,
+      "name": "Introduction to Digital Culture",
+      "description": "An introduction to digital technology and computer science issues in society. Topics may include Internet history, privacy, security, usability, graphics, games, computers in the media, development, economics, social media, AI, IP, computer and Internet ethics, global ethics, current legal issues, etc. Honors version available",
+      "prereq": [],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 390,
+      "name": "Computer Science Elective Topics",
+      "description": "Elective topics in computer science for computer science majors. May not be used to satisfy any degree requirements for a computer science major. This course has variable content and may be taken multiple times for credit.",
+      "prereq": [],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 401,
+      "name": "Foundation of Programming",
+      "description": "Required preparation, a first formal course in computer programming (e.g., COMP 110, COMP 116). Advanced programming: object-oriented design, classes, interfaces, packages, inheritance, delegation, observers, MVC (model view controller), exceptions, assertions. Students may not receive credit for this course after receiving credit for COMP 301. Honors version available",
+      "prereq": ["MATH231|MATH241"],
+      "req": [],
+      "hours": 4
+    },
+    {
+      "dept": "COMP",
+      "code": 410,
+      "name": "Data Structures",
+      "description": "The analysis of data structures and their associated algorithms. Abstract data types, lists, stacks, queues, trees, and graphs. Sorting, searching, hashing. Students may not receive credit for this course after receiving credit for COMP 210.",
+      "prereq": ["MATH231|MATH241", "COMP401"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 411,
+      "name": "Computer Organization",
+      "description": "Digital logic, circuit components. Data representation, computer architecture and implementation, assembly language programming. Students may not receive credit for this course after receiving credit for COMP 311.",
+      "prereq": ["MATH231|MATH241", "COMP401"],
+      "req": [],
+      "hours": 4
+    },
+    {
+      "dept": "COMP",
+      "code": 426,
+      "name": "Modern Web Programming",
+      "description": "Developing applications for the World Wide Web including both client-side and server-side programming. Emphasis on Model-View-Controller architecture, AJAX, RESTful Web services, and database interaction.",
+      "prereq": ["COMP211&COMP301|COMP401&COMP410"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 431,
+      "name": "Internet Services and Protocols",
+      "description": "Application-level protocols HTTP, SMTP, FTP, transport protocols TCP and UDP, and the network-level protocol IP. Internet architecture, naming, addressing, routing, and DNS. Sockets programming. Physical-layer technologies. Ethernet, ATM, and wireless.",
+      "prereq": ["COMP210&COMP211&COMP301|COMP401&COMP410&COMP411"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 455,
+      "name": "Models of Languages and Computation",
+      "description": "Introduction to the theory of computation. Finite automata, regular languages, pushdown automata, context-free languages, and Turing machines. Undecidable problems.",
+      "prereq": ["COMP110|COMP166|COMP401", "COMP283|MATH381"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 488,
+      "name": "Data Science in the Business World",
+      "description": "Students will acquire hands-on data science skills enabling them to solve real-world business problems. Since data science is an interdisciplinary field, business and computer science students learn and work together in this course. Leveraging each other's skills and knowledge, students create data-driven business insights using modern analytics.",
+      "prereq": [],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 495,
+      "name": "Mentored Research in Computer Science",
+      "description": "Independent research conducted under the direct mentorship of a computer science faculty member. This course cannot be counted toward the completion of the major or minor. For computer science majors only. Permission of instructor required.",
+      "prereq": [],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 496,
+      "name": "Independent Study in Computer Science",
+      "description": "Permission of the department. Computer science majors only. For advanced majors in computer science who wish to conduct an independent study or research project with a faculty supervisor. May be taken repeatedly for up to a total of six credit hours.",
+      "prereq": [],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 672,
+      "name": "Simulation Modeling and Analysis",
+      "description": "Introduces students to modeling, programming, and statistical analysis applicable to computer simulations. Emphasizes statistical analysis of simulation output for decision-making. Focuses on discrete-event simulations and discusses other simulation methodologies such as Monte Carlo and agent-based simulations. Students model, program, and run simulations using specialized software. Familiarity with computer programming recommended.",
+      "prereq": [],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 662,
+      "name": "Scientific Computation II",
+      "description": "Theory and practical issues arising in linear algebra problems derived from physical applications, e.g., discretization of ODEs and PDEs. Linear systems, linear least squares, eigenvalue problems, singular value decomposition.",
+      "prereq": [],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 590,
+      "name": "Topics in Computer Science",
+      "description": "Permission of the instructor. This course has variable content and may be taken multiple times for credit. Different sections may be taken in the same semester. Honors version available",
+      "prereq": [],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 585,
+      "name": "Serious Games",
+      "description": "Concepts of computer game development and their application beyond entertainment to fields such as education, health, and business. Course includes team development of a game. Honors version available",
+      "prereq": ["COMP210&COMP211&COMP301&COMP311|COMP401&COMP410&COMP411"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 581,
+      "name": "COMP",
+      "description": "Hands-on introduction to robotics with a focus on the computational aspects. Students will build and program mobile robots. Topics include kinematics, actuation, sensing, configuration spaces, control, and motion planning. Applications include industrial, mobile, personal, and medical robots. Honors version available",
+      "prereq": ["COMP210&COMP211&COMP301&COMP311|COMP401&COMP410&COMP411"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 576,
+      "name": "Mathematics for Image Computing",
+      "description": "Mathematics relevant to image processing and analysis using real image computing objectives and provided by computer implementations.",
+      "prereq": ["COMP116|COMP210|COMP401"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 572,
+      "name": "Computational Photography",
+      "description": "The course provides a hands on introduction to techniques in computational photography--the process of digitally recording light and then performing computational manipulations on those measurements to produce an image or other representation. The course includes an introduction to relevant concepts in computer vision and computer graphics.",
+      "prereq": ["COMP401&COMP410"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 562,
+      "name": "Introduction to Machine Learning",
+      "description": "Machine learning as applied to speech recognition, tracking, collaborative filtering and recommendation systems. Classification, regression, support vector machines, hidden Markov models, principal component analysis, and deep learning.",
+      "prereq": ["COMP401&COMP410"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 560,
+      "name": "Artificial Intelligence",
+      "description": "Introduction to techniques and applications of modern artificial intelligence. Combinatorial search, probabilistic models and reasoning, and applications to natural language understanding, robotics, and computer vision.",
+      "prereq": ["COMP210&COMP211&COMP301|COMP401&COMP410"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 555,
+      "name": "Bioalgorithms",
+      "description": "Bioinformatics algorithms. Topics include DNA restriction mapping, finding regulatory motifs, genome rearrangements, sequence alignments, gene prediction, graph algorithms, DNA sequencing, protein sequencing, combinatorial pattern matching, approximate pattern matching, clustering and evolution, tree construction, Hidden Markov Models, randomized algorithms.",
+      "prereq": ["COMP401&COMP410"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 550,
+      "name": "Algorithms and Analysis",
+      "description": "Formal specification and verification of programs. Techniques of algorithm analysis. Problem-solving paradigms. Survey of selected algorithms.",
+      "prereq": ["COMP210&COMP211&COMP301|COMP 410"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 541,
+      "name": "Digital Logic and Computer Design",
+      "description": "This course is an introduction to digital logic as well as the structure and electronic design of modern processors. Students will implement a working computer during the laboratory sessions.",
+      "prereq": ["COMP210&COMP211&COMP301&COMP311|COMP401&COMP410&COMP411"],
+      "req": [],
+      "hours": 4
+    },
+    {
+      "dept": "COMP",
+      "code": 533,
+      "name": "Distributed Systems",
+      "description": "Distributed systems and their goals; resource naming, synchronization of distributed processes; consistency and replication; fault tolerance; security and trust; distributed object-based systems; distributed file systems; distributed Web-based systems; and peer-to-peer systems.",
+      "prereq": ["COMP431|COMP524|COMP530"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 524,
+      "name": "Programming Language Concepts",
+      "description": "Concepts of high-level programming and their realization in specific languages. Data types, scope, control structures, procedural abstraction, classes, concurrency. Run-time implementation.",
+      "prereq": [
+        "COMP210&COMP211&COMP301&COMP311&COMP455|COMP401&COMP410&COMP411&COMP455"
+      ],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 523,
+      "name": "Software Engineering Laboratory",
+      "description": "Organization and scheduling of software engineering projects, structured programming, and design. Each team designs, codes, and debugs program components and synthesizes them into a tested, documented program product.",
+      "prereq": ["COMP210&COMP211&COMP301&COMP311|COMP401&COMP410&COMP411"],
+      "req": [],
+      "hours": 4
+    },
+    {
+      "dept": "COMP",
+      "code": 521,
+      "name": "Files and Databases",
+      "description": "Placement of data on secondary storage. File organization. Database history, practice, major models, system structure and design.",
+      "prereq": ["COMP210&COMP211&COMP301|COMP401&COMP410&COMP411"],
+      "req": [],
+      "hours": 3
+    },
+    {
+      "dept": "COMP",
+      "code": 520,
+      "name": "Compilers",
+      "description": "Design and construction of compilers. Theory and pragmatics of lexical, syntactic, and semantic analysis. Interpretation. Code generation for a modern architecture. Run-time environments. Includes a large compiler implementation project.",
+      "prereq": [
+        "COMP210&COMP211&COMP301&COMP311&COMP455|COMP401&COMP410&COMP411&COMP455"
+      ],
+      "req": [],
+      "hours": 3
+    }
+  ]
 }
