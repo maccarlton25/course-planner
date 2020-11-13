@@ -1,17 +1,38 @@
 .top-bar {
   text-align: center;
   height: 100%;
+  padding-bottom: 0px !important;
 }
 
 .card-deck {
-  padding: 50px 0px;
+  padding-top: 30px;
+  padding-bottom: 15px;
   width: 100%;
   display: flex;
-  margin-right: 0px;
+  margin: 0px 0px;
+  justify-content: center;
+}
+.card {
+  height: 100%;
+}
+
+.row {
+  justify-content: center;
 }
 .card-header {
   text-align: center;
 }
+
+.btn {
+  color: white !important;
+}
 .suggestions {
   text-align: center;
+}
+.col-9 {
+  padding-right: 0px;
+}
+
+.col-3 {
+  padding-right: 0px;
 }

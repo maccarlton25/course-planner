@@ -1,17 +1,20 @@
 import React from "react";
 import "../styles/Home.css";
 import Button from "react-bootstrap/Button";
+import "bootstrap/dist/js/bootstrap.min.js";
 
 const Home = () => {
   return (
     <>
       <div className="container">
-        <div className="row-3">
+        <div className="row">
           <div className="card-deck">
             <div className="card text-white bg-dark mb-3">
               <div className="card-header">Major Requirements Remaining</div>
               <div className="card-body top-bar">
-                <h5 className="card-text">0</h5>
+                <h1 className="card-text">0</h1>
+              </div>
+              <div className="card-footer bg-dark">
                 <Button block size="med">
                   Details
                 </Button>
@@ -20,7 +23,9 @@ const Home = () => {
             <div className="card text-white bg-dark mb-3">
               <div className="card-header">Major Electives Remaining</div>
               <div className="card-body top-bar">
-                <h5 className="card-text">0</h5>
+                <h1 className="card-text">0</h1>
+              </div>
+              <div className="card-footer bg-dark">
                 <Button block size="med">
                   Details
                 </Button>
@@ -35,114 +40,120 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="row-9">
+        <div className="row">
           <div className="col-9">
-            <div id="accordion">
-              <div class="card">
-                <div class="card-header" id="headingOne">
-                  <h5 class="mb-0">
+            <h3>Suggestions for you:</h3>
+            <div className="accordion" id="accordionExample">
+              <div className="card z-depth-0 bordered">
+                <div className="card-header bg-dark" id="headingOne">
+                  <h5 className="mb-0">
                     <button
-                      class="btn btn-link"
+                      className="btn btn-link"
+                      type="button"
                       data-toggle="collapse"
                       data-target="#collapseOne"
                       aria-expanded="true"
                       aria-controls="collapseOne"
                     >
-                      Collapsible Group Item #1
+                      COMP 110: Introduction to Programming
                     </button>
                   </h5>
                 </div>
-
                 <div
                   id="collapseOne"
-                  class="collapse show"
+                  className="collapse show"
                   aria-labelledby="headingOne"
-                  data-parent="#accordion"
+                  data-parent="#accordionExample"
                 >
-                  <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life
-                    accusamus terry richardson ad squid. 3 wolf moon officia
-                    aute, non cupidatat skateboard dolor brunch. Food truck
-                    quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                    sunt aliqua put a bird on it squid single-origin coffee
-                    nulla assumenda shoreditch et. Nihil anim keffiyeh
-                    helvetica, craft beer labore wes anderson cred nesciunt
-                    sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                    Leggings occaecat craft beer farm-to-table, raw denim
-                    aesthetic synth nesciunt you probably haven't heard of them
-                    accusamus labore sustainable VHS.
+                  <div className="card-body">
+                    An introduction to programming. Fundamental programming
+                    skills, typically using Java or JavaScript. Problem analysis
+                    and algorithm design. Students may not receive credit for
+                    both COMP 110 and COMP 116. Students may not receive credit
+                    for this course after receiving credit for COMP 116 or
+                    higher. Honors version available
                   </div>
                 </div>
               </div>
-              <div class="card">
-                <div class="card-header" id="headingTwo">
-                  <h5 class="mb-0">
+              <div className="card z-depth-0 bordered">
+                <div className="card-header bg-dark" id="headingTwo">
+                  <h5 className="mb-0">
                     <button
-                      class="btn btn-link collapsed"
+                      className="btn btn-link collapsed"
+                      type="button"
                       data-toggle="collapse"
                       data-target="#collapseTwo"
                       aria-expanded="false"
                       aria-controls="collapseTwo"
                     >
-                      Collapsible Group Item #2
+                      COMP 210: Data Structures and Analysis
                     </button>
                   </h5>
                 </div>
                 <div
                   id="collapseTwo"
-                  class="collapse"
+                  className="collapse"
                   aria-labelledby="headingTwo"
-                  data-parent="#accordion"
+                  data-parent="#accordionExample"
                 >
-                  <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life
-                    accusamus terry richardson ad squid. 3 wolf moon officia
-                    aute, non cupidatat skateboard dolor brunch. Food truck
-                    quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                    sunt aliqua put a bird on it squid single-origin coffee
-                    nulla assumenda shoreditch et. Nihil anim keffiyeh
-                    helvetica, craft beer labore wes anderson cred nesciunt
-                    sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                    Leggings occaecat craft beer farm-to-table, raw denim
-                    aesthetic synth nesciunt you probably haven't heard of them
-                    accusamus labore sustainable VHS.
+                  <div className="card-body">
+                    This course will teach you how to organize the data used in
+                    computer programs so that manipulation of that data can be
+                    done efficiently on large problems and large data
+                    instances.Rather than learning to use the data structures
+                    found in the libraries of programming languages, you will be
+                    learning how those libraries are constructed, and why the
+                    items that are included in them are there(and why some are
+                    excluded).
                   </div>
                 </div>
               </div>
-              <div class="card">
-                <div class="card-header" id="headingThree">
-                  <h5 class="mb-0">
+              <div className="card z-depth-0 bordered">
+                <div className="card-header bg-dark" id="headingThree">
+                  <h5 className="mb-0">
                     <button
-                      class="btn btn-link collapsed"
+                      className="btn btn-link collapsed"
+                      type="button"
                       data-toggle="collapse"
                       data-target="#collapseThree"
                       aria-expanded="false"
                       aria-controls="collapseThree"
                     >
-                      Collapsible Group Item #3
+                      COMP 211: Systems Fundamentals
                     </button>
                   </h5>
                 </div>
                 <div
                   id="collapseThree"
-                  class="collapse"
+                  className="collapse"
                   aria-labelledby="headingThree"
-                  data-parent="#accordion"
+                  data-parent="#accordionExample"
                 >
-                  <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life
-                    accusamus terry richardson ad squid. 3 wolf moon officia
-                    aute, non cupidatat skateboard dolor brunch. Food truck
-                    quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                    sunt aliqua put a bird on it squid single-origin coffee
-                    nulla assumenda shoreditch et. Nihil anim keffiyeh
-                    helvetica, craft beer labore wes anderson cred nesciunt
-                    sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                    Leggings occaecat craft beer farm-to-table, raw denim
-                    aesthetic synth nesciunt you probably haven't heard of them
-                    accusamus labore sustainable VHS.
+                  <div className="card-body">
+                    This is the first course in the introductory systems
+                    sequence.Students enter the course having taken an
+                    introductory programming course in a high - level
+                    programming language(COMP 110) and a course in discrete
+                    structures.The overarching goal is to bridge the gap between
+                    a students ' knowledge of a high-level programming language
+                    (COMP 110) and computer organization (COMP 311).
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-3">
+            <div className="card text-white bg-dark mb-3">
+              <div className="card-header">Current Schedule</div>
+              <div className="card-body top-bar">
+                <h5>COMP 426</h5>
+                <h5>COMP 426</h5>
+                <h5>COMP 426</h5>
+              </div>
+              <div className="card-footer bg-dark">
+                <Button block size="med">
+                  Details
+                </Button>
               </div>
             </div>
           </div>
