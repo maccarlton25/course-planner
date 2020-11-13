@@ -16,53 +16,168 @@ app.use(body_parser.json());
 
 const port = 9000;
 
-// << db setup >>
+// << db setup for courses >>
 const db = require("./db");
-const dbName = "test";
-const collectionName = "inventory";
-
+const dbName = "course_data";
+const collectionName = "comp";
+var courseCollection;
 // << db init >>
 db.initialize(dbName, collectionName, function(dbCollection) { // successCallback
   // get all items
+  courseCollection = dbCollection;
   dbCollection.find().toArray(function(err, result) {
       if (err) throw err;
         console.log(result);
   });
-
-  // << db CRUD routes >>
-  // app.post("/items", (request, response) => {
-  //   const item = request.body;
-  //   dbCollection.insertOne(item, (error, result) => { // callback of insertOne
-  //       if (error) throw error;
-  //       // return updated list
-  //       dbCollection.find().toArray((_error, _result) => { // callback of find
-  //           if (_error) throw _error;
-  //           response.json(_result);
-  //       });
-  //   });
-  // });
-  // app.get("/items/:id", (request, response) => {
-  //   const itemId = request.params.id;
-
-  //   dbCollection.findOne({ item: itemId }, (error, result) => {
-  //      if (error) throw error;
-  //      // return item
-  //      response.json(result);
-  //   });
-  // });
-  app.get("/items", (request, response) => {
-    // console.log("get item list");
-    // // return updated list
-    // dbCollection.find().toArray((error, result) => {
-    //     if (error) throw error;
-    //     response.json(result);
-    // });
-    response.send('Hello World');
-  });
-
 }, function(err) { // failureCallback
   throw (err);
 });
+// crud routes
+
+// get item by ID
+// ex. $ curl http://localhost:9000/items/{itemName}
+// ->JSON object matching the id
+app.get("/courses/:id", (request, response) => {
+  const itemId = request.params.id;
+  var codeInt = parseInt(itemId);
+  courseCollection.findOne({ code: codeInt }, (error, result) => {
+     if (error) throw error;
+     // return item
+     response.json(result);
+  });
+});
+
+// get contents of entire collection
+// ex. $ curl http://localhost:9000/items
+// ->JSON array of collection documents
+app.get("/courses", (request, response) => {
+  console.log("get item list");
+  // return updated list
+  courseCollection.find().toArray((error, result) => {
+      if (error) throw error;
+      response.json(result);
+  });
+});
+
+// delete document from collection
+// ex: curl -X DELETE http://localhost:9000/items/{itemName}
+// -> returns JSON Array of updated collection documents
+app.delete("/courses/:id", (request, response) => {
+  const itemId = request.params.id;
+  var codeInt = parseInt(itemId);
+  console.log("Delete item with id: ", itemId);
+
+  courseCollection.deleteOne({ code: codeint }, function(error, result) {
+      if (error) throw error;
+      // send back entire updated list after successful request
+      courseCollection.find().toArray(function(_error, _result) {
+          if (_error) throw _error;
+          response.json(_result);
+      });
+  });
+});
+
+// << db setup for users>>
+const dbName2 = "course_data";
+const collectionName2 = "users";
+var userCollection;
+// << db init >>
+db.initialize(dbName2, collectionName2, function(dbCollection) { // successCallback
+  // get all items
+  userCollection = dbCollection;
+  dbCollection.find().toArray(function(err, result) {
+      if (err) throw err;
+        console.log(result);
+  });
+});
+// add to dbCollection
+// ex: $ curl -X POST -H "Content-Type: application/json" --data '{"id": "tt0109830", "name": "Forrest
+// Gump", "genre": "drama"}' http://localhost:9000/items
+
+app.post("/users", (request, response) => {
+  const item = request.body;
+  userCollection.insertOne(item, (error, result) => { // callback of insertOne
+      if (error) throw error;
+      // return updated list
+      userCollection.find().toArray((_error, _result) => { // callback of find
+          if (_error) throw _error;
+          response.json(_result);
+      });
+  });
+});
+
+// update collection document
+// ex: curl -X PUT -H "Content-Type: application/json" --data '{"qty": 200}' http://localhost:9000/items/canvas2
+//  -> returns array of collection items to update front end 
+app.put("/users/:id", (request, response) => {
+  const itemId = request.params.id;
+  const item = request.body;
+  console.log("Editing item: ", itemId, " to be ", item);
+
+  userCollection.updateOne({ username: itemId }, { $set: item }, (error, result) => {
+      if (error) throw error;
+      // send back entire updated list, to make sure frontend data is up-to-date
+      userCollection.find().toArray(function(_error, _result) {
+          if (_error) throw _error;
+          response.json(_result);
+      });
+  });
+});
+
+// get contents of entire collection
+// ex. $ curl http://localhost:9000/items
+// ->JSON array of collection documents
+app.get("/users", (request, response) => {
+  console.log("get item list");
+  // return updated list
+  userCollection.find().toArray((error, result) => {
+      if (error) throw error;
+      response.json(result);
+  });
+});
+
+// delete document from collection
+// ex: curl -X DELETE http://localhost:9000/items/{itemName}
+// -> returns JSON Array of updated collection documents
+app.delete("/users/:id", (request, response) => {
+  const itemId = request.params.id;
+  console.log("Delete item with id: ", itemId);
+
+  userCollection.deleteOne({ username: itemId }, function(error, result) {
+      if (error) throw error;
+      // send back entire updated list after successful request
+      userCollection.find().toArray(function(_error, _result) {
+          if (_error) throw _error;
+          response.json(_result);
+      });
+  });
+});
+
+// get item by ID
+// ex. $ curl http://localhost:9000/items/{itemName}
+// ->JSON object matching the id
+app.get("/users/:id", (request, response) => {
+  const itemId = request.params.id;
+ 
+  userCollection.findOne({ username: itemId }, (error, result) => {
+     if (error) throw error;
+     // return item
+     response.json(result);
+  });
+});
+
+// get contents of entire collection
+// ex. $ curl http://localhost:9000/items
+// ->JSON array of collection documents
+app.get("/users", (request, response) => {
+  console.log("get item list");
+  // return updated list
+  userCollection.find().toArray((error, result) => {
+      if (error) throw error;
+      response.json(result);
+  });
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -80,7 +195,6 @@ app.use('/testAPI', testAPIRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
