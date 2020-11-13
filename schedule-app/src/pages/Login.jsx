@@ -3,6 +3,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/LoginSignup.css";
 
+// kmp example https://github.com/kmayerpatel/Fall2020COMP426UserLogin/tree/with_login
+
 const Login = () => {
     //<h1>Login to UNC Course Tracker</h1>
     const [email, setEmail] = useState("");

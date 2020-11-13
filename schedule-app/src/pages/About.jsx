@@ -6,11 +6,11 @@ const About = () => {
         <>
         <div class='page-content'>
             <h1 class='page-title'>About UNC Course Tracker</h1>
-            <img src='../src/images/unc-logo.png' alt='unc logo'></img>
+            <img src='../images/unc-logo.png' alt='unc logo'></img>
             <h4>About us</h4>
             <ul>
                 <li>
-                    Oinfo on creators
+                    Info on creators
                 </li>
                 <li>
                     MERN full-stack approach:
