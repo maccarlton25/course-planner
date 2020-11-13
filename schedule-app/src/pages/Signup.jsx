@@ -3,8 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/LoginSignup.css";
 
-const Login = () => {
-    //<h1>Login to UNC Course Tracker</h1>
+const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -19,7 +18,7 @@ const Login = () => {
     return (
         <>
         <br></br>
-        <h1>Log in to your Schedule Tracker</h1>
+        <h1>Create an account with the Schedule Tracker</h1>
         <div className="Login">
             <Form onSubmit={handleSubmit}>
                 <Form.Group size="lg" controlId="email">
@@ -40,7 +39,7 @@ const Login = () => {
                     />
                 </Form.Group>
                 <Button block size="lg" type="submit" disabled={!validateForm()}>
-                    Login
+                    Create Account
                 </Button>
             </Form>
         </div>
@@ -48,4 +47,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Signup;
