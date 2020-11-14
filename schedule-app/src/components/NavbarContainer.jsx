@@ -23,7 +23,7 @@ const NavbarContainer = () => {
                     <Nav.Link as={Link} to="/settings">Settings</Nav.Link>
                 </Nav>
                 <Button as={Link} to="/login" variant="dark" className="ml-auto">Login</Button>
-                <Button as={Link} to="/signup" variant="" className="">Sign Up</Button>
+                <Button as={Link} to="/signup" variant="secondary" className="">Sign Up</Button>
             </Navbar>
             <Switch>
                 <Route exact path="/" component={Home}/>
