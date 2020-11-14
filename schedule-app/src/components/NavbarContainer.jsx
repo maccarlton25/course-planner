@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, Button, } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { HashLink as HLink } from 'react-router-hash-link';
 import { Route, Switch} from 'react-router-dom';
 import Home from '../pages/Home.jsx';
 import About from '../pages/About.jsx';
@@ -23,7 +22,8 @@ const NavbarContainer = () => {
                     <Nav.Link as={Link} to="/settings">Settings</Nav.Link>
                 </Nav>
                 <Button as={Link} to="/login" variant="dark" className="ml-auto">Login</Button>
-                <Button as={Link} to="/signup" variant="secondary" className="">Sign Up</Button>
+                <Button as={Link} to="/signup" variant="secondary" disabled>Sign Up</Button>
+
             </Navbar>
             <Switch>
                 <Route exact path="/" component={Home}/>

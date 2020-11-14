@@ -20,8 +20,9 @@ const Login = () => {
 
     return (
         <>
-        <br></br>
-        <h1>Log in to your Schedule Tracker</h1>
+        <div className="jumbotron" style={{ textAlign: "center" }}>
+          <h1 className="display-4">- Log in to your Scheduler - </h1>
+        </div>
         <div className="Login">
             <Form onSubmit={handleSubmit}>
                 <Form.Group size="lg" controlId="email">
