@@ -17,9 +17,13 @@ const Signup = () => {
 
     return (
         <>
-        <br></br>
-        <h1>Create an account with the Schedule Tracker</h1>
-        <div className="Login">
+        <div className="jumbotron" style={{ textAlign: "center" }}>
+          <h1 className="display-4">- Create an account - </h1>
+          <p className="lead">
+            Creating an account allows you to save preferences, schedules, and keep track of your course progress.
+          </p>
+        </div>
+        <div className="Signup">
             <Form onSubmit={handleSubmit}>
                 <Form.Group size="lg" controlId="email">
                     <Form.Label>Email</Form.Label>

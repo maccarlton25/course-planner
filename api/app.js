@@ -1,36 +1,38 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+const mongoose = require('./node_modules/mongoose');
 
-var cors = require("cors");
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var testAPIRouter = require('./routes/testAPI');
-var app = express();
+let cors = require("cors");
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users.js');
+let testAPIRouter = require('./routes/testAPI');
+let app = express();
 const body_parser = require("body-parser");
 
 // parse JSON (application/json content-type)
 app.use(body_parser.json());
 
 const port = 9000;
+app.listen(port, () => console.log('server started on localhost:' + port));
 
 // << db setup for courses >>
 const db = require("./db");
 const dbName = "course_data";
 const collectionName = "comp";
-var courseCollection;
+let courseCollection;
 // << db init >>
 db.initialize(dbName, collectionName, function(dbCollection) { // successCallback
-  // get all items
-  courseCollection = dbCollection;
-  dbCollection.find().toArray(function(err, result) {
-      if (err) throw err;
+    // get all items
+    courseCollection = dbCollection;
+    dbCollection.find().toArray(function(err, result) {
+        if (err) throw err;
         console.log(result);
-  });
+    });
 }, function(err) { // failureCallback
-  throw (err);
+    throw (err);
 });
 // crud routes
 
@@ -38,144 +40,142 @@ db.initialize(dbName, collectionName, function(dbCollection) { // successCallbac
 // ex. $ curl http://localhost:9000/items/{itemName}
 // ->JSON object matching the id
 app.get("/courses/:id", (request, response) => {
-  const itemId = request.params.id;
-  var codeInt = parseInt(itemId);
-  courseCollection.findOne({ code: codeInt }, (error, result) => {
-     if (error) throw error;
-     // return item
-     response.json(result);
-  });
+    const itemId = request.params.id;
+    let codeInt = parseInt(itemId);
+    courseCollection.findOne({ code: codeInt }, (error, result) => {
+        if (error) throw error;
+        // return item
+        response.json(result);
+    });
 });
 
 // get contents of entire collection
 // ex. $ curl http://localhost:9000/items
 // ->JSON array of collection documents
 app.get("/courses", (request, response) => {
-  console.log("get item list");
-  // return updated list
-  courseCollection.find().toArray((error, result) => {
-      if (error) throw error;
-      response.json(result);
-  });
+    console.log("get item list");
+    // return updated list
+    courseCollection.find().toArray((error, result) => {
+        if (error) throw error;
+        response.json(result);
+    });
 });
 
 // delete document from collection
 // ex: curl -X DELETE http://localhost:9000/items/{itemName}
 // -> returns JSON Array of updated collection documents
 app.delete("/courses/:id", (request, response) => {
-  const itemId = request.params.id;
-  var codeInt = parseInt(itemId);
-  console.log("Delete item with id: ", itemId);
+    const itemId = request.params.id;
+    let codeInt = parseInt(itemId);
+    console.log("Delete item with id: ", itemId);
 
-  courseCollection.deleteOne({ code: codeint }, function(error, result) {
-      if (error) throw error;
-      // send back entire updated list after successful request
-      courseCollection.find().toArray(function(_error, _result) {
-          if (_error) throw _error;
-          response.json(_result);
-      });
-  });
+    courseCollection.deleteOne({ code: codeint }, function(error, result) {
+        if (error) throw error;
+        // send back entire updated list after successful request
+        courseCollection.find().toArray(function(_error, _result) {
+            if (_error) throw _error;
+            response.json(_result);
+        });
+    });
 });
 
 // << db setup for users>>
 const dbName2 = "course_data";
 const collectionName2 = "users";
-var userCollection;
+let userCollection;
 // << db init >>
 db.initialize(dbName2, collectionName2, function(dbCollection) { // successCallback
-  // get all items
-  userCollection = dbCollection;
-  dbCollection.find().toArray(function(err, result) {
-      if (err) throw err;
+    // get all items
+    userCollection = dbCollection;
+    dbCollection.find().toArray(function(err, result) {
+        if (err) throw err;
         console.log(result);
-  });
+    });
 });
+
 // add to dbCollection
 // ex: $ curl -X POST -H "Content-Type: application/json" --data '{"id": "tt0109830", "name": "Forrest
 // Gump", "genre": "drama"}' http://localhost:9000/items
 
 app.post("/users", (request, response) => {
-  const item = request.body;
-  userCollection.insertOne(item, (error, result) => { // callback of insertOne
-      if (error) throw error;
-      // return updated list
-      userCollection.find().toArray((_error, _result) => { // callback of find
-          if (_error) throw _error;
-          response.json(_result);
-      });
-  });
+    const item = request.body;
+    userCollection.insertOne(item, (error, result) => { // callback of insertOne
+        if (error) throw error;
+        // return updated list
+        userCollection.find().toArray((_error, _result) => { // callback of find
+            if (_error) throw _error;
+            response.json(_result);
+        });
+    });
 });
 
 // update collection document
 // ex: curl -X PUT -H "Content-Type: application/json" --data '{"qty": 200}' http://localhost:9000/items/canvas2
 //  -> returns array of collection items to update front end 
 app.put("/users/:id", (request, response) => {
-  const itemId = request.params.id;
-  const item = request.body;
-  console.log("Editing item: ", itemId, " to be ", item);
+    const itemId = request.params.id;
+    const item = request.body;
+    console.log("Editing item: ", itemId, " to be ", item);
 
-  userCollection.updateOne({ username: itemId }, { $set: item }, (error, result) => {
-      if (error) throw error;
-      // send back entire updated list, to make sure frontend data is up-to-date
-      userCollection.find().toArray(function(_error, _result) {
-          if (_error) throw _error;
-          response.json(_result);
-      });
-  });
-});
-
-// get contents of entire collection
-// ex. $ curl http://localhost:9000/items
-// ->JSON array of collection documents
-app.get("/users", (request, response) => {
-  console.log("get item list");
-  // return updated list
-  userCollection.find().toArray((error, result) => {
-      if (error) throw error;
-      response.json(result);
-  });
+    userCollection.updateOne({ username: itemId }, { $set: item }, (error, result) => {
+        if (error) throw error;
+        // send back entire updated list, to make sure frontend data is up-to-date
+        userCollection.find().toArray(function(_error, _result) {
+            if (_error) throw _error;
+            response.json(_result);
+        });
+    });
 });
 
 // delete document from collection
 // ex: curl -X DELETE http://localhost:9000/items/{itemName}
 // -> returns JSON Array of updated collection documents
+/*
 app.delete("/users/:id", (request, response) => {
-  const itemId = request.params.id;
-  console.log("Delete item with id: ", itemId);
+    const itemId = request.params.id;
+    console.log("Delete item with id: ", itemId);
 
-  userCollection.deleteOne({ username: itemId }, function(error, result) {
-      if (error) throw error;
-      // send back entire updated list after successful request
-      userCollection.find().toArray(function(_error, _result) {
-          if (_error) throw _error;
-          response.json(_result);
-      });
-  });
-});
+    userCollection.deleteOne({ username: itemId }, function(error, result) {
+        if (error) throw error;
+        // send back entire updated list after successful request
+        userCollection.find().toArray(function(_error, _result) {
+            if (_error) throw _error;
+            response.json(_result);
+        });
+    });
+}); 
+*/
 
 // get item by ID
 // ex. $ curl http://localhost:9000/items/{itemName}
 // ->JSON object matching the id
 app.get("/users/:id", (request, response) => {
-  const itemId = request.params.id;
- 
-  userCollection.findOne({ username: itemId }, (error, result) => {
-     if (error) throw error;
-     // return item
-     response.json(result);
-  });
+    const itemId = request.params.id;
+
+    userCollection.findOne({ username: itemId }, (error, result) => {
+        if (error) throw error;
+        // return item
+        response.json(result);
+    });
 });
 
 // get contents of entire collection
 // ex. $ curl http://localhost:9000/items
 // ->JSON array of collection documents
 app.get("/users", (request, response) => {
-  console.log("get item list");
-  // return updated list
-  userCollection.find().toArray((error, result) => {
-      if (error) throw error;
-      response.json(result);
-  });
+    console.log("get users list");
+    // return updated list
+    userCollection.find().toArray((error, result) => {
+        if (error) throw error;
+        response.json(result);
+    });
+});
+
+// mongoose setup
+mongoose.connect('mongodb+srv://testuser:TestUser123@cluster0.bvyym.mongodb.net/course_data?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, (err) => {
+    console.log('connection in progress');
+    if (err) throw err;
+    else console.log('mongodb connection successful');
 });
 
 // view engine setup
@@ -193,17 +193,17 @@ app.use('/users', usersRouter);
 app.use('/testAPI', testAPIRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+    next(createError(404));
 });
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;
