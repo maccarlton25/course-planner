@@ -15,7 +15,7 @@ const body_parser = require("body-parser");
 // parse JSON (application/json content-type)
 app.use(body_parser.json());
 
-const port = 9000;
+const port = 8000;
 app.listen(port, () => console.log('server started on localhost:' + port));
 
 // << db setup for courses >>
