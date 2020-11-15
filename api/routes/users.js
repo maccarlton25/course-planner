@@ -12,12 +12,15 @@ const auth = require("../models/auth.js");
 
 router.post('/register', async(req, res) => {
     try {
-        let { email, password, displayName } = req.body;
+        let { email, password, passwordCheck, displayName } = req.body;
         if (!email || !password) {
             return res.status(400).json({ msg: "not all fields have been filled" });
         }
         if (password.length < 5) {
             return res.status(400).json({ msg: "password must have minimum length of 5" })
+        }
+        if (password != passwordCheck) {
+            return res.status(400).json({ msg: "password must match confirmation" })
         }
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -94,6 +97,14 @@ router.post("/tokenIsValid", async(req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
+});
+
+router.get("/", auth, async (req, res)=>{
+    const user = await User.findById(req.user);
+    res.json({
+        displayName: user.displayName,
+        id: user._id
+    });
 });
 
 module.exports = router;

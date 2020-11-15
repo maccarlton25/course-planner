@@ -162,6 +162,7 @@ app.get("/users/:id", (request, response) => {
 // get contents of entire collection
 // ex. $ curl http://localhost:9000/items
 // ->JSON array of collection documents
+/*
 app.get("/users", (request, response) => {
     console.log("get users list");
     // return updated list
@@ -170,6 +171,7 @@ app.get("/users", (request, response) => {
         response.json(result);
     });
 });
+*/
 
 // mongoose setup
 mongoose.connect('mongodb+srv://testuser:TestUser123@cluster0.bvyym.mongodb.net/course_data?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, (err) => {
