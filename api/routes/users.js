@@ -9,9 +9,13 @@ const auth = require("../models/auth.js");
 // router.get('/test', function(req, res) {
 //     res.send("respond with a resource");
 // });
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 router.post('/register', async(req, res) => {
     try {
-        let { email, password, passwordCheck, displayName, majorType, coursesTaken, bsRequired } = req.body;
+        let { email, password, passwordCheck, displayName, majorType, coursesTaken, bsRequired, semRem } = req.body;
         if (!email || !password) {
             return res.status(400).json({ msg: "not all fields have been filled" });
         }
@@ -36,7 +40,8 @@ router.post('/register', async(req, res) => {
             displayName,
             majorType,
             coursesTaken, 
-            bsRequired
+            bsRequired,
+            semRem
         });
         console.log(newUser);
         const savedUser = await newUser.save();
@@ -67,6 +72,10 @@ router.post("/login", async(req, res) => {
                 id: user._id,
                 displayName: user.displayName,
                 email: user.email,
+                coursesTaken: user.coursesTaken,
+                bsRequired: user.bsRequired,
+                major: user.majorType,
+                semRem: user.semRem
             },
         });
     } catch (err) {
