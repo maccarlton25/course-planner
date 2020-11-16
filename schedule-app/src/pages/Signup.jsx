@@ -27,7 +27,7 @@ const Signup = () => {
     }, []);
     
     function validateForm() {
-        return email.length > 0 && password.length > 5;
+        return email.length > 0 && password.length > 4 && passwordCheck.length > 4;
     }
 
     function handleSubmit(e) {
