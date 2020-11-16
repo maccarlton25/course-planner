@@ -9,10 +9,10 @@ const auth = require("../models/auth.js");
 // router.get('/test', function(req, res) {
 //     res.send("respond with a resource");
 // });
-
+ß
 router.post('/register', async(req, res) => {
     try {
-        let { email, password, passwordCheck, displayName } = req.body;
+        let { email, password, passwordCheck, displayName, majorType, coursesTaken, bsRequired } = req.body;
         if (!email || !password) {
             return res.status(400).json({ msg: "not all fields have been filled" });
         }
@@ -34,7 +34,10 @@ router.post('/register', async(req, res) => {
         const newUser = new User({
             email,
             password: pswdHash,
-            displayName
+            displayName,
+            majorType,
+            coursesTaken, 
+            bsRequired
         });
 
         const savedUser = await newUser.save();
