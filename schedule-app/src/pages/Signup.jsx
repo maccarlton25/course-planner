@@ -55,7 +55,7 @@ const Signup = () => {
                 <h1 className="display-4">- Create an account - </h1>
                 <p className="lead">
                     Creating an account allows you to save progress and keep track of your courses.
-          </p>
+                </p>
             </div>
             <div className="Signup">
                 <Form onSubmit={handleSubmit}>

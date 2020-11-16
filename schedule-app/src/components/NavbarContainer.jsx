@@ -8,6 +8,8 @@ import Login from '../pages/Login.jsx';
 import Schedule from '../pages/Schedule.jsx';
 import Settings from '../pages/Settings.jsx';
 import Signup from '../pages/Signup.jsx';
+import Weather from '../pages/Weather.jsx';
+import Catalog from '../pages/Catalog.jsx';
 import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext.js";
 
@@ -33,6 +35,8 @@ const NavbarContainer = () => {
                     <Nav.Link as={Link} to="/about">About</Nav.Link>
                     <Nav.Link as={Link} to="/schedule">Scheduler</Nav.Link>
                     <Nav.Link as={Link} to="/settings">Settings</Nav.Link>
+                    <Nav.Link as={Link} to="/catalog">Catalog</Nav.Link>
+                    <Nav.Link as={Link} to="/weather">Weather</Nav.Link>
                 </Nav>
                 { userData.user ? (
                     <Button as={Link} onClick={logout} to="/logout" variant="dark" className="ml-auto">Log Out</Button>
@@ -51,6 +55,8 @@ const NavbarContainer = () => {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/settings" component={Settings} />
                 <Route exact path="/signup" component={Signup} />
+                <Route exact path="/weather" component={Weather} />
+                <Route exact path="/catalog" component={Catalog} />
             </Switch>
         </>
     )
