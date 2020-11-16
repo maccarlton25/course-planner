@@ -9,7 +9,6 @@ const auth = require("../models/auth.js");
 // router.get('/test', function(req, res) {
 //     res.send("respond with a resource");
 // });
-ß
 router.post('/register', async(req, res) => {
     try {
         let { email, password, passwordCheck, displayName, majorType, coursesTaken, bsRequired } = req.body;
@@ -39,7 +38,7 @@ router.post('/register', async(req, res) => {
             coursesTaken, 
             bsRequired
         });
-
+        console.log(newUser);
         const savedUser = await newUser.save();
 
         res.json(savedUser);
