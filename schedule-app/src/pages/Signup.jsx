@@ -22,6 +22,7 @@ const Signup = () => {
         }
         fetchData();
     }, []);
+    
     function validateForm() {
         return email.length > 0 && password.length > 5;
     }
