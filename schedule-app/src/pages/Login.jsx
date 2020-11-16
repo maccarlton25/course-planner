@@ -25,8 +25,14 @@ const Login = () => {
             token: loginRes.data.token,
             user: loginRes.data.user
         });
+        console.log(loginRes.data);
         localStorage.setItem("auth-token", loginRes.data.token);
-        history.push("");
+        localStorage.setItem("courses-taken", loginRes.data.user.coursesTaken);
+        localStorage.setItem("bs-reqs", loginRes.data.user.bsRequired);
+        localStorage.setItem("display-name",loginRes.data.user.displayName);
+        localStorage.setItem("sem-rem", loginRes.data.user.semRem);
+        localStorage.setItem("major", loginRes.data.user.major);
+        history.push("/");
     }
 
     return (

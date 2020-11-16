@@ -7,6 +7,7 @@ const user_schema = new mongoose.Schema({
     majorType: { type: String},
     coursesTaken: {type: Array},
     bsRequired: {type: Array},
+    semRem: {type: Number},
 });
 
 module.exports = User = mongoose.model("user", user_schema);

@@ -5,6 +5,29 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 const Home = () => {
+  let semToTerm = {
+    1: "Spring 2021",
+    2: "Fall 2021",
+    3: "Spring 2022",
+    4: "Fall 2022",
+    5: "Spring 2023",
+    6: "Fall 2023",
+    7: "Spring 2024",
+    8: "Fall 2024",
+  };
+  let getGradTerm = function() {
+    return semToTerm[localStorage.getItem("sem-rem")];
+  };
+
+  let majorConv = {
+    "bs": "BS, Computer Science",
+    "ba": "BA, Computer Science",
+  };
+
+  let getMajor = function() {
+    return majorConv[localStorage.getItem("major")];
+  };
+
   return (
     <>
       <div className="container">
@@ -37,10 +60,11 @@ const Home = () => {
               </div>
             </div>
             <div className="card text-white bg-dark mb-3">
-              <div className="card-header">INSERT USER NAME</div>
+              <div className="card-header">{localStorage.getItem("display-name")}</div>
               <div className="card-body top-bar">
-                <h5 className="card-text">MAJOR</h5>
-                <h5 className="card-text">GRAD DATE</h5>
+                <h5 className="card-text">{getMajor()}</h5>
+                <br></br>
+                <h5 className="card-text">{getGradTerm()}</h5>
               </div>
             </div>
           </div>

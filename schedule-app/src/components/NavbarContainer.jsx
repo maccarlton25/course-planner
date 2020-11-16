@@ -39,7 +39,7 @@ const NavbarContainer = () => {
                     <Nav.Link as={Link} to="/weather">Weather</Nav.Link>
                 </Nav>
                 { userData.user ? (
-                    <Button as={Link} onClick={logout} to="/logout" variant="dark" className="ml-auto">Log Out</Button>
+                    <Button as={Link} onClick={logout} to="/" variant="dark" className="ml-auto">Log Out</Button>
                 ) : (
                     <>
                     <Button as={Link} onClick={login} to="/login" variant="dark" className="ml-auto">Login</Button>
