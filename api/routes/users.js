@@ -9,10 +9,7 @@ const auth = require("../models/auth.js");
 // router.get('/test', function(req, res) {
 //     res.send("respond with a resource");
 // });
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 router.post('/register', async(req, res) => {
     try {
         let { email, password, passwordCheck, displayName, majorType, coursesTaken, bsRequired, semRem } = req.body;
@@ -113,8 +110,13 @@ router.post("/tokenIsValid", async(req, res) => {
 router.get("/", auth, async (req, res)=>{
     const user = await User.findById(req.user);
     res.json({
+        id: user._id,
         displayName: user.displayName,
-        id: user._id
+        email: user.email,
+        coursesTaken: user.coursesTaken,
+        bsRequired: user.bsRequired,
+        major: user.majorType,
+        semRem: user.semRem
     });
 });
 

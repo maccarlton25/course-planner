@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "../context/UserContext.js";
 import "../styles/Home.css";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 const Home = () => {
+  const { userData, setUserData } = useContext(UserContext);
+
   let semToTerm = {
     1: "Spring 2021",
     2: "Fall 2021",
@@ -15,8 +18,8 @@ const Home = () => {
     7: "Spring 2024",
     8: "Fall 2024",
   };
-  let getGradTerm = function() {
-    return semToTerm[localStorage.getItem("sem-rem")];
+  let getGradTerm = function () {
+    return semToTerm[userData.user.semRem];
   };
 
   let majorConv = {
@@ -24,8 +27,8 @@ const Home = () => {
     "ba": "BA, Computer Science",
   };
 
-  let getMajor = function() {
-    return majorConv[localStorage.getItem("major")];
+  let getMajor = function () {
+    return majorConv[userData.user.major];
   };
 
   return (
@@ -60,12 +63,21 @@ const Home = () => {
               </div>
             </div>
             <div className="card text-white bg-dark mb-3">
-              <div className="card-header">{localStorage.getItem("display-name")}</div>
-              <div className="card-body top-bar">
-                <h5 className="card-text">{getMajor()}</h5>
-                <br></br>
-                <h5 className="card-text">{getGradTerm()}</h5>
-              </div>
+              {userData.user ? (<>
+                <div className="card-header">{userData.user.displayName}</div>
+                <div className="card-body top-bar">
+                  <h5 className="card-text">{getMajor()}</h5>
+                  <br></br>
+                  <h5 className="card-text">{getGradTerm()}</h5>
+                </div> </>) : (
+                  (<>
+                    <div className="card-header">Name</div>
+                    <div className="card-body top-bar">
+                      <h5 className="card-text">Major</h5>
+                      <br></br>
+                      <h5 className="card-text">Graduation Term</h5>
+                    </div> </>)
+                )}
             </div>
           </div>
         </div>

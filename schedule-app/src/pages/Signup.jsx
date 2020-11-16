@@ -43,7 +43,7 @@ const Signup = () => {
             const loginRes = await Axios.post("http://localhost:9000/users/login", { email, password });
             setUserData({
                 token: loginRes.data.token,
-                user: loginRes.data.user
+                user: loginRes.data.user,
             });
             console.log(loginRes.data);
             localStorage.setItem("auth-token", loginRes.data.token);
