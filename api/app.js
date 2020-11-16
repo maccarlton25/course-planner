@@ -12,11 +12,13 @@ let testAPIRouter = require('./routes/testAPI');
 let app = express();
 const body_parser = require("body-parser");
 
+app.use(cors());
+app.options('*', cors());
 // parse JSON (application/json content-type)
 app.use(body_parser.json());
 
-const port = 8000;
-app.listen(port, () => console.log('server started on localhost:' + port));
+//const port = 9000;
+//app.listen(port, () => console.log('server started on localhost:' + port));
 
 // << db setup for courses >>
 const db = require("./db");
@@ -183,7 +185,6 @@ mongoose.connect('mongodb+srv://testuser:TestUser123@cluster0.bvyym.mongodb.net/
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

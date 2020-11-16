@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../styles/LoginSignup.css";
@@ -10,10 +10,18 @@ const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordCheck, setPasswordCheck] = useState("");
-
+    const [courses, setCourses] = useState([]);
     const {setUserData} = useContext(UserContext);
     const history = useHistory();
 
+    useEffect(async () => {
+        async function fetchData() {
+            const result = await Axios.get("http://localhost:9000/courses");
+            const data = result.data.sort((a, b) => (a.code > b.code) ? 1 : -1);
+            setCourses(data);
+        }
+        fetchData();
+    }, []);
     function validateForm() {
         return email.length > 0 && password.length > 5;
     }
@@ -72,6 +80,13 @@ const Signup = () => {
                             Your password must be at least 5 characters long.
                         </Form.Text>
                     </Form.Group>
+                    <Form.Group controlId="exampleForm.ControlSelect1">
+                        <Form.Label>Example select</Form.Label>
+                        <Form.Control as="select" multiple>
+                        {courses.map(({code}, index) =>
+                        <option value={code}>COMP{code}</option>)}
+                        </Form.Control>
+                    </Form.Group>
                     <Button block size="lg" type="submit" disabled={!validateForm()}>
                         Create Account
                 </Button>
@@ -80,4 +95,5 @@ const Signup = () => {
         </>
     );
 }
+
 export default Signup;
