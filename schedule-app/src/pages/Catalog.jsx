@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import Card from "react-bootstrap/Card";
+import CourseContainer from "../components/CourseContainer";
 const Catalog = () => {
     const [courses, setCourses] = useState([]);
-
+    const [searchTerm, setSearchTerm] = useState("");
     useEffect(() => {
         async function fetchData() {
             const result = await Axios.get("http://localhost:9000/courses");
@@ -12,7 +12,16 @@ const Catalog = () => {
         }
         fetchData();
     }, []);
-
+    const editSearchTerm = (e) => {
+        var val = e.target.value;
+        console.log("change");
+        setTimeout(()=> {setSearchTerm(val);}, 100);
+    }
+    const dynamicSearch = (e) => {
+        return courses.filter(function(course) {
+            return course.code.toString().includes(searchTerm.toString());
+        })
+    }
     return (
         <>
         <div className="container-fluid">
@@ -23,24 +32,17 @@ const Catalog = () => {
                 </p>
             </div>
             <div className="row">
-                <div className="md-form mt-0">
-                    <input className="form-control" type="text" placeholder="Search" aria-label="Search"></input>
+                <div class="md-form active-cyan-2 mb-3">                    
+                    <input className="form-control" type="text" 
+                            placeholder="Search" aria-label="Search" value={searchTerm} 
+                            onChange={editSearchTerm}>
+                    </input>
+                    <p class="text-muted">Type a course code here</p>
                 </div>
             </div>
-            
+                <CourseContainer courses={dynamicSearch()}/>
             <div class="row">
-                {courses.map(({code, name, description}, index) =>
-                    <Card style={{ width: '70vw' }}>
-                    <Card.Body>
-                      <Card.Title>COMP {code}</Card.Title>
-                      <Card.Subtitle className="mb-2 text-muted">{name}</Card.Subtitle>
-                      <Card.Text>
-                        {description}
-                      </Card.Text>
-                      
-                    </Card.Body>
-                  </Card>
-                )}
+                
             </div>
         </div>
         </>
