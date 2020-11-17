@@ -6,7 +6,6 @@ import Home from '../pages/Home.jsx';
 import About from '../pages/About.jsx';
 import Login from '../pages/Login.jsx';
 import Schedule from '../pages/Schedule.jsx';
-import Settings from '../pages/Settings.jsx';
 import Signup from '../pages/Signup.jsx';
 import Weather from '../pages/Weather.jsx';
 import Catalog from '../pages/Catalog.jsx';
@@ -34,7 +33,6 @@ const NavbarContainer = () => {
                     <Nav.Link as={Link} to="/">Home</Nav.Link>
                     <Nav.Link as={Link} to="/about">About</Nav.Link>
                     <Nav.Link as={Link} to="/schedule">Scheduler</Nav.Link>
-                    <Nav.Link as={Link} to="/settings">Settings</Nav.Link>
                     <Nav.Link as={Link} to="/catalog">Catalog</Nav.Link>
                     <Nav.Link as={Link} to="/weather">Weather</Nav.Link>
                 </Nav>
@@ -53,7 +51,6 @@ const NavbarContainer = () => {
                 <Route exact path="/about" component={About} />
                 <Route exact path="/schedule" component={Schedule} />
                 <Route exact path="/login" component={Login} />
-                <Route exact path="/settings" component={Settings} />
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/weather" component={Weather} />
                 <Route exact path="/catalog" component={Catalog} />
