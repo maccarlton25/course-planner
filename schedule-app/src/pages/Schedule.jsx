@@ -1,108 +1,149 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
+import UserContext from "../context/UserContext.js";
+import Axios from "axios";
 
 const Schedule = () => {
+  const { userData, setUserData } = useContext(UserContext);
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await Axios.get("http://localhost:9000/courses");
+      const data = result.data.sort((a, b) => (a.code > b.code ? 1 : -1));
+      setCourses(data);
+    }
+    fetchData();
+  }, []);
+
+  const oldMajorReq = [
+    "401",
+    "410",
+    "411",
+    "455",
+    "550",
+    // "m231",
+    // "m232",
+    // "m233",
+    // "m347",
+    // "s435",
+    // "p1168",
+    // "sci",
+  ];
+  const newMajorReq = [
+    "210",
+    "211",
+    "301",
+    "311",
+    "455",
+    "550",
+    "m231",
+    "m232",
+    "m233",
+    "m347",
+    "s435",
+    "p1168",
+    "sci",
+  ];
+
+  function majorReqLeft() {
+    let userCourses = userData.user.coursesTaken;
+    // let otherUserCourses = userData.user.bsRequired;
+    let result = [];
+    oldMajorReq.forEach((course) => {
+      if (!userCourses.includes(course)) {
+        result.push(course);
+      }
+    });
+    // oldMajorReq.forEach((course) => {
+    //   if (!otherUserCourses.includes(course)) {
+    //     result.push(course);
+    //   }
+    // });
+    return result;
+  }
+
+  function getCourseTitle(num) {
+    let obj = courses.filter((course) => course.code == num);
+    if (obj[0]) {
+      return obj[0].dept + " " + obj[0].code + ": " + obj[0].name;
+    }
+  }
+
+  function getCourseDes(num) {
+    let obj = courses.filter((course) => course.code == num);
+    if (obj[0]) {
+      return obj[0].description;
+    }
+  }
+
+  function havePreReqs(course) {
+    let userCourses = userData.user.coursesTaken;
+    let preReqs = course.prereq;
+    if (preReqs.length == 0) {
+      return true;
+    }
+    let splitOr = preReqs.split("|");
+    if (!splitOr.includes("&")) {
+      splitOr.forEach((course) => {
+        userCourses.forEach((ele) => {
+          if (course.includes(JSON.stringify(ele.code))) {
+            return true;
+          }
+        });
+      });
+    }
+  }
+
+  function getSuggestions() {
+    let userCourses = userData.user.coursesTaken;
+    let notTaken = courses.filter(
+      (course) => !userCourses.includes(JSON.stringify(course.code))
+    );
+    console.log(notTaken);
+  }
+
   return (
     <>
       <div className="container">
         <div className="row">
           <div className="col-8">
+            <h3>Major Requirements Remaining:</h3>
             <div className="accordion" id="accordionExample">
-              <div className="card z-depth-0 bordered">
-                <div className="card-header bg-dark" id="headingOne">
-                  <h5 className="mb-0">
-                    <button
-                      className="btn btn-link"
-                      type="button"
-                      data-toggle="collapse"
-                      data-target="#collapseOne"
-                      aria-expanded="true"
-                      aria-controls="collapseOne"
-                    >
-                      COMP 110: Introduction to Programming
-                    </button>
-                  </h5>
-                </div>
-                <div
-                  id="collapseOne"
-                  className="collapse show"
-                  aria-labelledby="headingOne"
-                  data-parent="#accordionExample"
-                >
-                  <div className="card-body">
-                    An introduction to programming. Fundamental programming
-                    skills, typically using Java or JavaScript. Problem analysis
-                    and algorithm design. Students may not receive credit for
-                    both COMP 110 and COMP 116. Students may not receive credit
-                    for this course after receiving credit for COMP 116 or
-                    higher. Honors version available
-                  </div>
-                </div>
-              </div>
-              <div className="card z-depth-0 bordered">
-                <div className="card-header bg-dark" id="headingTwo">
-                  <h5 className="mb-0">
-                    <button
-                      className="btn btn-link collapsed"
-                      type="button"
-                      data-toggle="collapse"
-                      data-target="#collapseTwo"
-                      aria-expanded="false"
-                      aria-controls="collapseTwo"
-                    >
-                      COMP 210: Data Structures and Analysis
-                    </button>
-                  </h5>
-                </div>
-                <div
-                  id="collapseTwo"
-                  className="collapse"
-                  aria-labelledby="headingTwo"
-                  data-parent="#accordionExample"
-                >
-                  <div className="card-body">
-                    This course will teach you how to organize the data used in
-                    computer programs so that manipulation of that data can be
-                    done efficiently on large problems and large data
-                    instances.Rather than learning to use the data structures
-                    found in the libraries of programming languages, you will be
-                    learning how those libraries are constructed, and why the
-                    items that are included in them are there(and why some are
-                    excluded).
-                  </div>
-                </div>
-              </div>
-              <div className="card z-depth-0 bordered">
-                <div className="card-header bg-dark" id="headingThree">
-                  <h5 className="mb-0">
-                    <button
-                      className="btn btn-link collapsed"
-                      type="button"
-                      data-toggle="collapse"
-                      data-target="#collapseThree"
-                      aria-expanded="false"
-                      aria-controls="collapseThree"
-                    >
-                      COMP 211: Systems Fundamentals
-                    </button>
-                  </h5>
-                </div>
-                <div
-                  id="collapseThree"
-                  className="collapse"
-                  aria-labelledby="headingThree"
-                  data-parent="#accordionExample"
-                >
-                  <div className="card-body">
-                    This is the first course in the introductory systems
-                    sequence.Students enter the course having taken an
-                    introductory programming course in a high - level
-                    programming language(COMP 110) and a course in discrete
-                    structures.The overarching goal is to bridge the gap between
-                    a students ' knowledge of a high-level programming language
-                    (COMP 110) and computer organization (COMP 311).
-                  </div>
-                </div>
-              </div>
+              {userData.user && courses ? (
+                <>
+                  {getSuggestions()}
+                  {majorReqLeft().map((num) => (
+                    <div className="card z-depth-0 bordered">
+                      <div className="card-header bg-dark" id="headingOne">
+                        <h5 className="mb-0">
+                          <button
+                            className="btn btn-link"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#collapseOne"
+                            aria-expanded="true"
+                            aria-controls="collapseOne"
+                          >
+                            {getCourseTitle(num)}
+                          </button>
+                        </h5>
+                      </div>
+                      <div
+                        id="collapseOne"
+                        className="collapse show"
+                        aria-labelledby="headingOne"
+                        data-parent="#accordionExample"
+                      >
+                        <div className="card-body">{getCourseDes(num)}</div>
+                      </div>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <h5>LOADING...</h5>
+                </>
+              )}
             </div>
           </div>
           <div className="col-4"></div>
