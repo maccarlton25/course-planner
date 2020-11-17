@@ -4,7 +4,7 @@ import Course from '../components/Course';
 const CourseContainer = (props) => {
     return (
         <>
-        <div>
+        <div className="centering">
             {props.courses.map(course => <Course course={course}/>)}
         </div>
         </>
