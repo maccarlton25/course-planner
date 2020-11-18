@@ -4,6 +4,7 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 const mongoose = require('./node_modules/mongoose');
+const User = require("./models/user_model.js");
 
 let cors = require("cors");
 let indexRouter = require('./routes/index');
@@ -114,19 +115,17 @@ app.post("/users", (request, response) => {
 // update collection document
 // ex: curl -X PUT -H "Content-Type: application/json" --data '{"qty": 200}' http://localhost:9000/items/canvas2
 //  -> returns array of collection items to update front end 
-app.put("/users/:id", (request, response) => {
-    const itemId = request.params.id;
-    const item = request.body;
-    console.log("Editing item: ", itemId, " to be ", item);
-
-    userCollection.updateOne({ username: itemId }, { $set: item }, (error, result) => {
-        if (error) throw error;
-        // send back entire updated list, to make sure frontend data is up-to-date
-        userCollection.find().toArray(function(_error, _result) {
-            if (_error) throw _error;
-            response.json(_result);
-        });
-    });
+app.put("/users/:id", async (req, res) => {
+    const itemId = req.params.id;
+    const item = req.body;
+    const user = await User.findById(itemId);
+    user.majorType = item.majorType;
+    user.coursesTaken = item.coursesTaken;
+    user.bsRequired = item.bsRequired;
+    user.semRem = item.semRem;
+    user.save()
+    const savedUser = await User.findById(itemId);
+    res.json(savedUser);
 });
 
 // delete document from collection

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 const Home = () => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { userData } = useContext(UserContext);
 
   let semToTerm = {
     1: "Spring 2021",
