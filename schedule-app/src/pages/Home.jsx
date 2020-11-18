@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import UserContext from "../context/UserContext.js";
 import "../styles/Home.css";
 import Button from "react-bootstrap/Button";
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 const Home = () => {
-  const { userData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
 
   let semToTerm = {
     1: "Spring 2021",

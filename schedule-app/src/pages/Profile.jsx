@@ -2,14 +2,14 @@ import React, { useState, useContext, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from 'react-bootstrap/Col';
-import "../styles/Profile.css";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext.js";
+import "../styles/Profile.css";
 
 const Profile = () => {
     const [majorType, setMajorType] = useState("ba");
-    const [semRem, setSemRem] = useState(0);
+    const [semRem, setSemRem] = useState(1);
     const [coursesTaken, setCoursesTaken] = useState([]);
     const [bsRequired, setBsRequired] = useState([]);
     const [courses, setCourses] = useState([]);
@@ -25,21 +25,19 @@ const Profile = () => {
         fetchData();
     }, []);
 
-    function handleSubmit(e) {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         const url = "http://localhost:9000/users/" + userData.user.id;
         console.log("url: "+url);
         const user = { majorType, coursesTaken, bsRequired, semRem };
-        (async () => {
-            const updateRes = await Axios.put(url, user);
-            setUserData({
-                token: userData.token,
-                user: updateRes.data.user,
-            });
-            console.log(updateRes);
-            console.log(updateRes.data);
-            history.push("/");
-        })();
+        const updateRes = await Axios.put(url, user);
+        setUserData({
+            token: userData.token,
+            user: updateRes.data.user,
+        });
+        console.log(userData.user);
+        console.log(updateRes.data);
+        history.push("/");
     }
 
     return (

@@ -116,16 +116,31 @@ app.post("/users", (request, response) => {
 // ex: curl -X PUT -H "Content-Type: application/json" --data '{"qty": 200}' http://localhost:9000/items/canvas2
 //  -> returns array of collection items to update front end 
 app.put("/users/:id", async (req, res) => {
-    const itemId = req.params.id;
-    const item = req.body;
-    const user = await User.findById(itemId);
-    user.majorType = item.majorType;
-    user.coursesTaken = item.coursesTaken;
-    user.bsRequired = item.bsRequired;
-    user.semRem = item.semRem;
-    user.save()
-    const savedUser = await User.findById(itemId);
-    res.json(savedUser);
+    try {
+        const itemId = req.params.id;
+        const item = req.body;
+        const user = await User.findById(itemId);
+        user.majorType = item.majorType;
+        user.coursesTaken = item.coursesTaken;
+        user.bsRequired = item.bsRequired;
+        user.semRem = item.semRem;
+        user.save()
+        const savedUser = await User.findById(itemId);
+        res.json({
+            user: {
+                id: savedUser._id,
+                displayName: savedUser.displayName,
+                email: savedUser.email,
+                coursesTaken: savedUser.coursesTaken,
+                bsRequired: savedUser.bsRequired,
+                major: savedUser.majorType,
+                semRem: savedUser.semRem
+            },
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+    
 });
 
 // delete document from collection
