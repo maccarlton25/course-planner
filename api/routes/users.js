@@ -120,4 +120,17 @@ router.get("/", auth, async (req, res)=>{
     });
 });
 
+router.get("/profile", auth, async (req, res)=>{
+    const user = await User.findById(req.user);
+    res.json({
+        id: user._id,
+        displayName: user.displayName,
+        email: user.email,
+        coursesTaken: user.coursesTaken,
+        bsRequired: user.bsRequired,
+        major: user.majorType,
+        semRem: user.semRem
+    });
+});
+
 module.exports = router;
