@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import UserContext from "../context/UserContext.js";
 import "../styles/Home.css";
 import Button from "react-bootstrap/Button";
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 const Home = () => {
-  const { userData } = useContext(UserContext);
+  const { userData, setUserData } = useContext(UserContext);
 
   const oldBSReq = ["401", "410", "411", "455", "550"];
   const bsReq = ["m231", "m232", "m233", "m347", "s435", "p1168", "sci"];
