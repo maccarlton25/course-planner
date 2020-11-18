@@ -35,7 +35,9 @@ const Profile = () => {
             token: userData.token,
             user: updateRes.data.user,
         });
-        console.log(userData.user);
+        console.log("userData");
+        console.log(userData);
+        console.log("updateRes.data");
         console.log(updateRes.data);
         history.push("/");
     }
