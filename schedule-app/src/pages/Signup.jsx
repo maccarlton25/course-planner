@@ -79,7 +79,6 @@ const Signup = () => {
                     <Form.Group size="lg" controlId="email">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
-                            autoFocus
                             placeholder="name@example.com"
                             type="email"
                             value={email}

@@ -195,7 +195,7 @@ const Home = () => {
 
           <div className="col-3">
             <div className="card text-white bg-dark mb-3">
-              <div className="card-header">Current Schedule</div>
+              <div className="card-header">Recent Courses</div>
               <div className="card-body top-bar">
                 <h5>COMP 426</h5>
                 <h5>COMP 426</h5>
