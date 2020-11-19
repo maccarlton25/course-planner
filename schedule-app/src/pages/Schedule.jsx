@@ -27,16 +27,9 @@ const Schedule = () => {
     let userCourses = userData.user.coursesTaken;
     let result = [];
     if (userData.user.major == "bs") {
-      let otherUserCourses = userData.user.bsRequired;
-
       if (userCourses.includes("401")) {
         oldBSReq.forEach((course) => {
           if (!userCourses.includes(course)) {
-            result.push(course);
-          }
-        });
-        bsReq.forEach((course) => {
-          if (!otherUserCourses.includes(course)) {
             result.push(course);
           }
         });
@@ -46,33 +39,17 @@ const Schedule = () => {
             result.push(course);
           }
         });
-        bsReq.forEach((course) => {
-          if (!otherUserCourses.includes(course)) {
-            result.push(course);
-          }
-        });
       }
     } else {
-      let otherUserCourses = userData.user.bsRequired;
       if (userCourses.includes("401")) {
         oldBAReq.forEach((course) => {
           if (!userCourses.includes(course)) {
             result.push(course);
           }
         });
-        baReq.forEach((course) => {
-          if (!otherUserCourses.includes(course)) {
-            result.push(course);
-          }
-        });
       } else {
         newBAReq.forEach((course) => {
           if (!userCourses.includes(course)) {
-            result.push(course);
-          }
-        });
-        baReq.forEach((course) => {
-          if (!otherUserCourses.includes(course)) {
             result.push(course);
           }
         });
@@ -125,15 +102,14 @@ const Schedule = () => {
   }
 
   function havePreReqs(input) {
+    let hasPreReqs = [];
     let userCourses = userData.user.coursesTaken;
-    console.log(userCourses);
-    let obj = courses.filter((course) => course.code == parseInt(input));
-    let preReq = obj[0].prereq[0];
+    let preReq = input.prereq;
     if (preReq.length == 0) {
       return true;
     }
     for (let i = 0; i < preReq.length; i++) {
-      let splitOr = preReq.split("|");
+      let splitOr = preReq[0].split("|");
       let splitAnd = [];
       splitOr.forEach((element) => {
         splitAnd.push(element.split("&"));
@@ -145,10 +121,14 @@ const Schedule = () => {
       }
       for (let i = 0; i < splitAnd.length; i++) {
         if (userCourses.includes(splitAnd[i][splitAnd[i].length - 1])) {
-          return true;
+          hasPreReqs.push(true);
         }
       }
+    }
+    if (hasPreReqs.includes(false) | (hasPreReqs.length == 0)) {
       return false;
+    } else {
+      return true;
     }
   }
 
@@ -158,6 +138,13 @@ const Schedule = () => {
       (course) => !userCourses.includes(JSON.stringify(course.code))
     );
     console.log(notTaken);
+    let notTakenHasPR = [];
+    notTaken.forEach((course) => {
+      if (havePreReqs(course)) {
+        notTakenHasPR.push(course);
+      }
+    });
+    console.log(notTakenHasPR);
   }
 
   return (
@@ -195,6 +182,7 @@ const Schedule = () => {
                       </div>
                     </div>
                   ))}
+                  {getSuggestions()}
                 </>
               ) : (
                 <>
@@ -220,7 +208,6 @@ const Schedule = () => {
                             aria-expanded="true"
                             aria-controls="collapseOne"
                           >
-                            {console.log(havePreReqs("431"))}
                             {getCourseTitle(num)}
                           </button>
                         </h5>
@@ -243,6 +230,9 @@ const Schedule = () => {
               )}
             </div>
           </div>
+        </div>
+        <div className="row">
+          <div className="col"></div>
         </div>
       </div>
     </>
