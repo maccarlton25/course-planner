@@ -93,7 +93,6 @@ const Home = () => {
           }
         });
       }
-      console.log(userData.user);
     }
     return result.length;
   }
