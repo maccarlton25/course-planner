@@ -9,6 +9,7 @@ import Schedule from '../pages/Schedule.jsx';
 import Signup from '../pages/Signup.jsx';
 import Weather from '../pages/Weather.jsx';
 import Catalog from '../pages/Catalog.jsx';
+import Profile from '../pages/Profile.jsx';
 import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext.js";
 
@@ -23,6 +24,7 @@ const NavbarContainer = () => {
             token: undefined,
             user: undefined
         })
+        localStorage.clear();
     };
 
     return (
@@ -35,6 +37,7 @@ const NavbarContainer = () => {
                     <Nav.Link as={Link} to="/schedule">Scheduler</Nav.Link>
                     <Nav.Link as={Link} to="/catalog">Catalog</Nav.Link>
                     <Nav.Link as={Link} to="/weather">Weather</Nav.Link>
+                    <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
                 </Nav>
                 { userData.user ? (
                     <Button as={Link} onClick={logout} to="/" variant="dark" className="ml-auto">Log Out</Button>
@@ -54,6 +57,7 @@ const NavbarContainer = () => {
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/weather" component={Weather} />
                 <Route exact path="/catalog" component={Catalog} />
+                <Route exact path="/profile" component={Profile} />
             </Switch>
         </>
     )

@@ -14,6 +14,7 @@ const Catalog = () => {
     }, []);
     const editSearchTerm = (e) => {
         var val = e.target.value;
+        // console.log("change");
         setTimeout(()=> {setSearchTerm(val);}, 100);
     }
     const dynamicSearch = (e) => {

@@ -10,7 +10,7 @@ const auth = require("../models/auth.js");
 //     res.send("respond with a resource");
 // });
 
-router.post('/register', async(req, res) => {
+router.post('/register', async (req, res) => {
     try {
         let { email, password, passwordCheck, displayName, majorType, coursesTaken, bsRequired, semRem } = req.body;
         if (!email || !password) {
@@ -36,13 +36,12 @@ router.post('/register', async(req, res) => {
             password: pswdHash,
             displayName,
             majorType,
-            coursesTaken, 
+            coursesTaken,
             bsRequired,
             semRem
         });
         console.log(newUser);
         const savedUser = await newUser.save();
-
         res.json(savedUser);
 
     } catch (err) {
@@ -50,7 +49,7 @@ router.post('/register', async(req, res) => {
     }
 });
 
-router.post("/login", async(req, res) => {
+router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
@@ -81,7 +80,23 @@ router.post("/login", async(req, res) => {
     }
 });
 
-router.delete("/delete", auth, async(req, res) => {
+router.put("/update", async (req, res) => {
+    try {
+        const user = await User.findById(itemId);
+        const item = req.body;
+        user.majorType = item.majorType;
+        user.coursesTaken = item.coursesTaken;
+        user.bsRequired = item.bsRequired;
+        user.semRem = item.semRem;
+        const savedUser = user.save()
+        res.json(saveduser);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+
+});
+
+router.delete("/delete", auth, async (req, res) => {
     try {
         const deletedUser = await User.findByIdAndDelete(req.user);
         res.json(deletedUser);
@@ -90,7 +105,7 @@ router.delete("/delete", auth, async(req, res) => {
     }
 });
 
-router.post("/tokenIsValid", async(req, res) => {
+router.post("/tokenIsValid", async (req, res) => {
     try {
         const token = req.header("x-auth-token");
         if (!token) return res.json(false);
@@ -107,7 +122,20 @@ router.post("/tokenIsValid", async(req, res) => {
     }
 });
 
-router.get("/", auth, async (req, res)=>{
+router.get("/", auth, async (req, res) => {
+    const user = await User.findById(req.user);
+    res.json({
+        id: user._id,
+        displayName: user.displayName,
+        email: user.email,
+        coursesTaken: user.coursesTaken,
+        bsRequired: user.bsRequired,
+        major: user.majorType,
+        semRem: user.semRem
+    });
+});
+
+router.get("/profile", auth, async (req, res) => {
     const user = await User.findById(req.user);
     res.json({
         id: user._id,
