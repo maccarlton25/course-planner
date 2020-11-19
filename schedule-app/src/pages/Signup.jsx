@@ -11,22 +11,15 @@ const Signup = () => {
     const [displayName, setDisplayName] = useState("");
     const [password, setPassword] = useState("");
     const [passwordCheck, setPasswordCheck] = useState("");
-    const [majorType, setMajorType] = useState("");
-    const [semRem, setSemRem] = useState(0);
-    const [coursesTaken, setCoursesTaken] = useState([]);
-    const [bsRequired, setBsRequired] = useState([]);
-    const [courses, setCourses] = useState([]);
     const { setUserData } = useContext(UserContext);
     const history = useHistory();
 
-    useEffect(() => {
-        async function fetchData() {
-            const result = await Axios.get("http://localhost:9000/courses");
-            const data = result.data.sort((a, b) => (a.code > b.code) ? 1 : -1);
-            setCourses(data);
-        }
-        fetchData();
-    }, []);
+    // initializing for db
+    const majorType = "";
+    const semRem = 1;
+    const coursesTaken = [];
+    const bsRequired = [];
+    const courses = [];
 
     function validateForm() {
         return email.length > 0 && password.length > 4 && passwordCheck.length > 4;
@@ -34,7 +27,7 @@ const Signup = () => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        const newUser = { email, password, passwordCheck };
+        const newUser = { email, password, passwordCheck, majorType, semRem, coursesTaken, bsRequired, courses };
         (async () => {
             await Axios.post("http://localhost:9000/users/register", newUser);
             const loginRes = await Axios.post("http://localhost:9000/users/login", { email, password });
