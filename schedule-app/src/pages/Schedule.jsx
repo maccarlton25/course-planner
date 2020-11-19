@@ -197,10 +197,10 @@ const Schedule = () => {
                   ))}
                 </>
               ) : (
-                <>
-                  <h5>LOADING...</h5>
-                </>
-              )}
+                  <>
+                    <h5>LOADING...</h5>
+                  </>
+                )}
             </div>
           </div>
           <div className="col-6">
@@ -237,10 +237,10 @@ const Schedule = () => {
                   ))}
                 </>
               ) : (
-                <>
-                  <h5>LOADING...</h5>
-                </>
-              )}
+                  <>
+                    <h5>LOADING...</h5>
+                  </>
+                )}
             </div>
           </div>
         </div>
