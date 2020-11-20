@@ -46,7 +46,6 @@ const Home = () => {
     bs: "BS, Computer Science",
     ba: "BA, Computer Science",
   };
-
   let getMajor = function () {
     return majorConv[userData.user.major];
   };
@@ -203,10 +202,7 @@ const Home = () => {
 
   function getCourseTitle(course) {
     console.log(course);
-    if (course.code == 581) {
-      return "COMP 581: Introduction to Robotics";
-    }
-    return course.dept + " " + course.code + ": " + course.name;
+    return (course.code == 581) ? "COMP 581: Introduction to Robotics" : course.dept + " " + course.code + ": " + course.name;
   }
 
   function getRecentClasses() {
