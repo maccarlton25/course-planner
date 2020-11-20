@@ -11,6 +11,7 @@ const Home = () => {
   const { userData, setUserData } = useContext(UserContext);
 
   useEffect(() => {
+    
     async function fetchData() {
       const result = await Axios.get("http://localhost:9000/courses");
       const data = result.data.sort((a, b) => (a.code > b.code ? 1 : -1));
