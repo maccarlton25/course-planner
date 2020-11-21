@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import "../styles/Schedule.css";
 import Course from "../components/Course";
+import Card from "react-bootstrap/Card";
 
 const Schedule = () => {
   const { userData, setUserData } = useContext(UserContext);
@@ -109,13 +110,6 @@ const Schedule = () => {
     return coursesArr.courses.filter((course) => course.code == num);
   }
 
-  function getCourseTitle(num) {
-    let obj = courses.filter((course) => course.code == num);
-    if (obj[0]) {
-      return obj[0].dept + " " + obj[0].code + ": " + obj[0].name;
-    }
-  }
-
   function getSuggCourseTitle(course) {
     if (course.code == 581) {
       return "COMP 581: Introduction to Robotics";
@@ -213,7 +207,7 @@ const Schedule = () => {
     <>
       <div className="container">
         <div className="row">
-          <div className="col-8">
+          <div className="col-6">
             <div>
               {userData.user ? (
                 <>
@@ -444,7 +438,7 @@ const Schedule = () => {
               )}
             </div>
           </div>
-          <div className="col-4">
+          <div className="col-6">
             <div>
               <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -488,6 +482,44 @@ const Schedule = () => {
                         {majorReqLeft().map((course) => (
                           <Course course={course} />
                         ))}
+                        {majorReqLeft().length == 0 && (
+                          <Card>
+                            <Card.Body>
+                              <Card.Title>
+                                No CS Requirements remaining
+                              </Card.Title>
+                              <Card.Subtitle className="mb-2 text-muted">
+                                Don't forget about your additional requirements.
+                              </Card.Subtitle>
+                              <Card.Text>
+                                <ul>
+                                  <li>
+                                    For BS Students:
+                                    <ul>
+                                      <li>MATH 231</li>
+                                      <li>MATH 232</li>
+                                      <li>MATH 233</li>
+                                      <li>MATH 347/547</li>
+                                      <li>MATH 116/118</li>
+                                      <li>Second Science Course</li>
+                                    </ul>
+                                  </li>
+                                  <li>
+                                    For BA Students:
+                                    <ul>
+                                      <li>MATH 231</li>
+                                      <li>STOR 155/435</li>
+                                      <li>
+                                        Four Additional Electives - see
+                                        registrars website for details
+                                      </li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                              </Card.Text>
+                            </Card.Body>
+                          </Card>
+                        )}
                       </>
                     ) : (
                       <>
