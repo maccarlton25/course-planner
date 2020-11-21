@@ -12,7 +12,6 @@ const Home = () => {
   const coursesArr = require("../compclasses.json");
 
   useEffect(() => {
-    
     async function fetchData() {
       const result = await Axios.get("http://localhost:9000/courses");
       const data = result.data.sort((a, b) => (a.code > b.code ? 1 : -1));
@@ -47,6 +46,7 @@ const Home = () => {
     bs: "BS, Computer Science",
     ba: "BA, Computer Science",
   };
+
   let getMajor = function () {
     return majorConv[userData.user.major];
   };
@@ -201,7 +201,10 @@ const Home = () => {
 
   function getCourseTitle(course) {
     console.log(course);
-    return (course.code == 581) ? "COMP 581: Introduction to Robotics" : course.dept + " " + course.code + ": " + course.name;
+    if (course.code == 581) {
+      return "COMP 581: Introduction to Robotics";
+    }
+    return course.dept + " " + course.code + ": " + course.name;
   }
 
   function getRecentClasses() {
@@ -311,22 +314,6 @@ const Home = () => {
                       className="carousel slide"
                       data-ride="carousel"
                     >
-                      <ol className="carousel-indicators">
-                        <li
-                          data-target="#carouselIndicators"
-                          data-slide-to="0"
-                          className="active"
-                        ></li>
-                        <li
-                          data-target="#carouselIndicators"
-                          data-slide-to="1"
-                        ></li>
-                        <li
-                          data-target="#carouselIndicators"
-                          data-slide-to="2"
-                        ></li>
-                      </ol>
-
                       <div className="carousel-inner">
                         <>
                           {getSuggestions(1).map((course) => (

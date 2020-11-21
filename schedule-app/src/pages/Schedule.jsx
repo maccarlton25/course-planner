@@ -194,7 +194,7 @@ const Schedule = () => {
                             <>
                               <h2 className="card-text">
                                 {7 -
-                                  userData.user.bsRequired.length -
+                                  userData.user.bsRequired.length +
                                   majorReqLeft().length}
                               </h2>
                               <h2></h2>
