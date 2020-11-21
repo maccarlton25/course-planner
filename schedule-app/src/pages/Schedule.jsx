@@ -476,9 +476,8 @@ const Schedule = () => {
                                 Don't forget about your additional requirements.
                               </Card.Subtitle>
                               <Card.Text>
-                                <ul>
-                                  <li>
-                                    For BS Students:
+                                {userData.user.major == "bs" && (
+                                  <>
                                     <ul>
                                       {!userData.user.bsRequired.includes(
                                         "m231"
@@ -530,19 +529,32 @@ const Schedule = () => {
                                         </>
                                       )}
                                     </ul>
-                                  </li>
-                                  <li>
-                                    For BA Students:
+                                  </>
+                                )}
+                                {userData.user.major == "ba" && (
+                                  <>
                                     <ul>
-                                      <li>MATH 231</li>
-                                      <li>STOR 155/435</li>
+                                      {!userData.user.bsRequired.includes(
+                                        "m231"
+                                      ) && (
+                                        <>
+                                          <li>MATH 231</li>
+                                        </>
+                                      )}
+                                      {!userData.user.bsRequired.includes(
+                                        "s435"
+                                      ) && (
+                                        <>
+                                          <li>STOR 435</li>
+                                        </>
+                                      )}
                                       <li>
                                         Four Additional Electives - see
                                         registrars website for details
                                       </li>
                                     </ul>
-                                  </li>
-                                </ul>
+                                  </>
+                                )}
                               </Card.Text>
                             </Card.Body>
                           </Card>
