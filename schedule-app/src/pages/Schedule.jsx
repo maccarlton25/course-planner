@@ -63,7 +63,7 @@ const Schedule = () => {
     return result;
   }
 
-  function electivesLeft() {
+  function electivesLeft(taken) {
     let userCourses = userData.user.coursesTaken;
     let result = [];
     let output = 0;
@@ -71,20 +71,24 @@ const Schedule = () => {
       userCourses.forEach((course) => {
         if (!oldBSReq.includes(course)) {
           if (parseInt(course) > 420) {
-            result.push(course);
+            result.push(getCourse(course)[0]);
           }
         }
       });
       if (result.length >= 5) {
         output = 0;
       } else {
-        output = 5 - result.length;
+        if (userCourses.includes("210")) {
+          output = 6 - result.length;
+        } else {
+          output = 5 - result.length;
+        }
       }
     } else {
       userCourses.forEach((course) => {
         if (!oldBAReq.includes(course)) {
           if (parseInt(course) > 420) {
-            result.push(course);
+            result.push(getCourse(course)[0]);
           }
         }
       });
@@ -94,7 +98,11 @@ const Schedule = () => {
         output = 2 - result.length;
       }
     }
-    return output;
+    if (taken) {
+      return result;
+    } else {
+      return output;
+    }
   }
 
   function getCourse(num) {
@@ -209,25 +217,44 @@ const Schedule = () => {
             <div>
               {userData.user ? (
                 <>
-                  <div className="card text-white bg-dark mb-3">
-                    <div className="card-header">Major Electives Remaining</div>
-                    <div className="card-body top-bar">
-                      {userData.user ? (
-                        <>
-                          <h2 className="card-text">{electivesLeft()}</h2>
-                        </>
-                      ) : (
-                        <>
-                          <h2 className="card-text">0</h2>
-                        </>
-                      )}
+                  <div className="card-deck">
+                    <div className="card text-white bg-dark mb-3">
+                      <div className="card-header">
+                        Major Requirements Remaining
+                      </div>
+                      <div className="card-body top-bar">
+                        {userData.user ? (
+                          <>
+                            <h2 className="card-text">
+                              {majorReqLeft().length}
+                            </h2>
+                            <h2></h2>
+                          </>
+                        ) : (
+                          <>
+                            <h2 className="card-text">0</h2>
+                          </>
+                        )}
+                      </div>
                     </div>
-                    <div className="card-footer bg-dark">
-                      <Link to="/schedule">
-                        <Button block size="med">
-                          Details
-                        </Button>
-                      </Link>
+                    <div className="card text-white bg-dark mb-3">
+                      <div className="card-header">
+                        Major Electives Remaining
+                      </div>
+                      <div className="card-body top-bar">
+                        {userData.user ? (
+                          <>
+                            <h2 className="card-text">
+                              {electivesLeft(false)}
+                            </h2>
+                            <h2></h2>
+                          </>
+                        ) : (
+                          <>
+                            <h2 className="card-text">0</h2>
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
                   <div className="card text-white bg-dark mb-3">
@@ -418,19 +445,79 @@ const Schedule = () => {
             </div>
           </div>
           <div className="col-4">
-            <h4>Major Requirements Remaining:</h4>{" "}
             <div>
-              {userData.user ? (
-                <>
-                  {majorReqLeft().map((course) => (
-                    <Course course={course} />
-                  ))}
-                </>
-              ) : (
-                <>
-                  <h5>LOADING...</h5>
-                </>
-              )}
+              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a
+                    class="nav-link active"
+                    id="pills-home-tab"
+                    data-toggle="pill"
+                    href="#pills-home"
+                    role="tab"
+                    aria-controls="pills-home"
+                    aria-selected="true"
+                  >
+                    Major
+                  </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a
+                    class="nav-link"
+                    id="pills-profile-tab"
+                    data-toggle="pill"
+                    href="#pills-profile"
+                    role="tab"
+                    aria-controls="pills-profile"
+                    aria-selected="false"
+                  >
+                    Electives
+                  </a>
+                </li>
+              </ul>
+              <div class="tab-content" id="pills-tabContent">
+                <div
+                  class="tab-pane fade show active"
+                  id="pills-home"
+                  role="tabpanel"
+                  aria-labelledby="pills-home-tab"
+                >
+                  <div>
+                    <h4>Major Requirements Remaining:</h4>{" "}
+                    {userData.user ? (
+                      <>
+                        {majorReqLeft().map((course) => (
+                          <Course course={course} />
+                        ))}
+                      </>
+                    ) : (
+                      <>
+                        <h5>LOADING...</h5>
+                      </>
+                    )}
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="pills-profile"
+                  role="tabpanel"
+                  aria-labelledby="pills-profile-tab"
+                >
+                  <div>
+                    <h4>Electives Taken:</h4>{" "}
+                    {userData.user ? (
+                      <>
+                        {electivesLeft(true).map((course) => (
+                          <Course course={course} />
+                        ))}
+                      </>
+                    ) : (
+                      <>
+                        <h5>LOADING...</h5>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
