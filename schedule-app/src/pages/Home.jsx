@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, Component } from "react";
 import UserContext from "../context/UserContext.js";
 import "../styles/Home.css";
 import Button from "react-bootstrap/Button";
@@ -9,6 +9,7 @@ import Axios from "axios";
 const Home = () => {
   const [courses, setCourses] = useState([]);
   const { userData, setUserData } = useContext(UserContext);
+  const coursesArr = require("../compclasses.json");
 
   useEffect(() => {
     async function fetchData() {
@@ -175,25 +176,23 @@ const Home = () => {
 
   function getSuggestions(index) {
     let userCourses = userData.user.coursesTaken;
-    if (courses) {
-      let notTaken = courses.filter(
-        (course) => !userCourses.includes(JSON.stringify(course.code))
-      );
-      let notTakenHasPR = [];
-      notTaken.forEach((course) => {
-        if (havePreReqs(course)) {
-          if ((course.code > 200) & (course.code < 600)) {
-            notTakenHasPR.push(course);
-          }
+    let notTaken = coursesArr.courses.filter(
+      (course) => !userCourses.includes(JSON.stringify(course.code))
+    );
+    let notTakenHasPR = [];
+    notTaken.forEach((course) => {
+      if (havePreReqs(course)) {
+        if ((course.code > 200) & (course.code < 600)) {
+          notTakenHasPR.push(course);
         }
-      });
-      let suggArr = [];
-      for (let i = 0; i < index; i++) {
-        suggArr.push(notTakenHasPR[getRandomInt(notTakenHasPR.length)]);
       }
-      console.log(suggArr);
-      return suggArr;
+    });
+    let suggArr = [];
+    for (let i = 0; i < index; i++) {
+      suggArr.push(notTakenHasPR[getRandomInt(notTakenHasPR.length)]);
     }
+    console.log(suggArr);
+    return suggArr;
   }
 
   function getRandomInt(max) {
@@ -223,7 +222,9 @@ const Home = () => {
     }
     let output = [];
     codes.forEach((num) => {
-      let obj = courses.filter((course) => course.code == parseInt(num));
+      let obj = coursesArr.courses.filter(
+        (course) => course.code == parseInt(num)
+      );
       if (obj[0]) {
         output.push(obj[0].dept + " " + obj[0].code + ": " + obj[0].name);
       }
@@ -304,7 +305,7 @@ const Home = () => {
         <div className="row">
           <div className="col-9">
             <div className="card text-white bg-dark mb-3">
-              {userData.user && courses ? (
+              {userData.user ? (
                 <>
                   <div className="card-header">Suggestions for you:</div>
                   <div className="card-body top-bar">

@@ -1,10 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
 import UserContext from "../context/UserContext.js";
 import Axios from "axios";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import "../styles/Schedule.css";
+import Course from "../components/Course";
 
 const Schedule = () => {
   const { userData, setUserData } = useContext(UserContext);
   const [courses, setCourses] = useState([]);
+  const coursesArr = require("../compclasses.json");
 
   useEffect(() => {
     async function fetchData() {
@@ -30,13 +35,13 @@ const Schedule = () => {
       if (userCourses.includes("401")) {
         oldBSReq.forEach((course) => {
           if (!userCourses.includes(course)) {
-            result.push(course);
+            result.push(getCourse(course)[0]);
           }
         });
       } else {
         newBSReq.forEach((course) => {
           if (!userCourses.includes(course)) {
-            result.push(course);
+            result.push(getCourse(course)[0]);
           }
         });
       }
@@ -44,13 +49,13 @@ const Schedule = () => {
       if (userCourses.includes("401")) {
         oldBAReq.forEach((course) => {
           if (!userCourses.includes(course)) {
-            result.push(course);
+            result.push(getCourse(course)[0]);
           }
         });
       } else {
         newBAReq.forEach((course) => {
           if (!userCourses.includes(course)) {
-            result.push(course);
+            result.push(getCourse(course)[0]);
           }
         });
       }
@@ -83,8 +88,17 @@ const Schedule = () => {
           }
         }
       });
+      if (result.length >= 2) {
+        output = 0;
+      } else {
+        output = 2 - result.length;
+      }
     }
-    return result;
+    return output;
+  }
+
+  function getCourse(num) {
+    return coursesArr.courses.filter((course) => course.code == num);
   }
 
   function getCourseTitle(num) {
@@ -94,10 +108,41 @@ const Schedule = () => {
     }
   }
 
-  function getCourseDes(num) {
-    let obj = courses.filter((course) => course.code == num);
-    if (obj[0]) {
-      return obj[0].description;
+  function getSuggCourseTitle(course) {
+    if (course.code == 581) {
+      return "COMP 581: Introduction to Robotics";
+    }
+    return course.dept + " " + course.code + ": " + course.name;
+  }
+
+  function havePreReqs(input) {
+    let hasPreReqs = [];
+    let userCourses = userData.user.coursesTaken;
+    let preReq = input.prereq;
+    if (preReq.length == 0) {
+      return true;
+    }
+    for (let i = 0; i < preReq.length; i++) {
+      let splitOr = preReq[0].split("|");
+      let splitAnd = [];
+      splitOr.forEach((element) => {
+        splitAnd.push(element.split("&"));
+      });
+      for (let i = 0; i < splitAnd.length; i++) {
+        for (let j = 0; j < splitAnd[i].length; j++) {
+          splitAnd[i][j] = splitAnd[i][j].substring(4);
+        }
+      }
+      for (let i = 0; i < splitAnd.length; i++) {
+        if (userCourses.includes(splitAnd[i][splitAnd[i].length - 1])) {
+          hasPreReqs.push(true);
+        }
+      }
+    }
+    if (hasPreReqs.includes(false) | (hasPreReqs.length == 0)) {
+      return false;
+    } else {
+      return true;
     }
   }
 
@@ -132,107 +177,262 @@ const Schedule = () => {
     }
   }
 
-  function getSuggestions() {
+  function getSuggestions(first) {
     let userCourses = userData.user.coursesTaken;
-    let notTaken = courses.filter(
+    let notTaken = coursesArr.courses.filter(
       (course) => !userCourses.includes(JSON.stringify(course.code))
     );
-    console.log(notTaken);
     let notTakenHasPR = [];
     notTaken.forEach((course) => {
       if (havePreReqs(course)) {
-        notTakenHasPR.push(course);
+        if ((course.code > 200) & (course.code < 600)) {
+          notTakenHasPR.push(course);
+        }
       }
     });
-    console.log(notTakenHasPR);
+    let suggArr = [];
+    if (first) {
+      suggArr.push(notTakenHasPR[0]);
+    } else {
+      for (let i = 1; i < notTakenHasPR.length; i++) {
+        suggArr.push(notTakenHasPR[i]);
+      }
+    }
+    return suggArr;
   }
 
   return (
     <>
       <div className="container">
         <div className="row">
-          <div className="col-6">
-            <h3>Major Requirements Remaining:</h3>
-            <div className="accordion" id="accordionExample">
-              {userData.user && courses ? (
+          <div className="col-8">
+            <div>
+              {userData.user ? (
                 <>
-                  {majorReqLeft().map((num) => (
-                    <div className="card z-depth-0 bordered">
-                      <div className="card-header bg-dark" id="headingOne">
-                        <h5 className="mb-0">
-                          <button
-                            className="btn btn-link"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#collapseOne"
-                            aria-expanded="true"
-                            aria-controls="collapseOne"
-                          >
-                            {getCourseTitle(num)}
-                          </button>
-                        </h5>
-                      </div>
+                  <div className="card text-white bg-dark mb-3">
+                    <div className="card-header">Major Electives Remaining</div>
+                    <div className="card-body top-bar">
+                      {userData.user ? (
+                        <>
+                          <h2 className="card-text">{electivesLeft()}</h2>
+                        </>
+                      ) : (
+                        <>
+                          <h2 className="card-text">0</h2>
+                        </>
+                      )}
+                    </div>
+                    <div className="card-footer bg-dark">
+                      <Link to="/schedule">
+                        <Button block size="med">
+                          Details
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="card text-white bg-dark mb-3">
+                    <div className="card-header">
+                      All the courses you qualify for:
+                    </div>
+                    <div className="card-body top-bar">
                       <div
-                        id="collapseOne"
-                        className="collapse show"
-                        aria-labelledby="headingOne"
-                        data-parent="#accordionExample"
+                        id="carouselIndicators"
+                        className="carousel slide"
+                        data-ride="carousel"
                       >
-                        <div className="card-body">{getCourseDes(num)}</div>
+                        <div className="carousel-inner">
+                          <>
+                            {getSuggestions(true).map((course) => (
+                              <div className="carousel-item active">
+                                <img
+                                  src={require("../images/UNC_logo_RGB.png")}
+                                  alt="course1"
+                                />
+                                <div className="text-center">
+                                  <h5>{getSuggCourseTitle(course)}</h5>
+                                  <p>{course.description}</p>
+                                </div>
+                              </div>
+                            ))}
+                            {getSuggestions(false).map((course) => (
+                              <div className="carousel-item">
+                                <img
+                                  src={require("../images/UNC_logo_RGB.png")}
+                                  alt="course1"
+                                />
+                                <div className="text-center">
+                                  <h5>{getSuggCourseTitle(course)}</h5>
+                                  <p>{course.description}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </>
+                        </div>
+
+                        <a
+                          className="carousel-control-prev"
+                          href="#carouselIndicators"
+                          role="button"
+                          data-slide="prev"
+                        >
+                          <span
+                            className="carousel-control-prev-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span className="sr-only">Previous</span>
+                        </a>
+                        <a
+                          className="carousel-control-next"
+                          href="#carouselIndicators"
+                          role="button"
+                          data-slide="next"
+                        >
+                          <span
+                            className="carousel-control-next-icon"
+                            aria-hidden="true"
+                          ></span>
+                          <span className="sr-only">Next</span>
+                        </a>
                       </div>
                     </div>
-                  ))}
-                  {getSuggestions()}
-                </>
-              ) : (
-                  <>
-                    <h5>LOADING...</h5>
-                  </>
-                )}
-            </div>
-          </div>
-          <div className="col-6">
-            <h3>Electives Remaining:</h3>
-            <div className="accordion" id="accordionExample">
-              {userData.user && courses ? (
-                <>
-                  {electivesLeft().map((num) => (
-                    <div className="card z-depth-0 bordered">
-                      <div className="card-header bg-dark" id="headingOne">
-                        <h5 className="mb-0">
-                          <button
-                            className="btn btn-link"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#collapseOne"
-                            aria-expanded="true"
-                            aria-controls="collapseOne"
-                          >
-                            {getCourseTitle(num)}
-                          </button>
-                        </h5>
-                      </div>
-                      <div
-                        id="collapseOne"
-                        className="collapse show"
-                        aria-labelledby="headingOne"
-                        data-parent="#accordionExample"
-                      >
-                        <div className="card-body">{getCourseDes(num)}</div>
-                      </div>
+                    <div className="card-footer bg-dark">
+                      <Link to="/catalog">
+                        <Button block size="med">
+                          View All Courses
+                        </Button>
+                      </Link>
                     </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="card-header">Suggestions for you:</div>
+                  <div className="card-body top-bar">
+                    <div
+                      id="carouselIndicators"
+                      className="carousel slide"
+                      data-ride="carousel"
+                    >
+                      <ol className="carousel-indicators">
+                        <li
+                          data-target="#carouselIndicators"
+                          data-slide-to="0"
+                          className="active"
+                        ></li>
+                        <li
+                          data-target="#carouselIndicators"
+                          data-slide-to="1"
+                        ></li>
+                        <li
+                          data-target="#carouselIndicators"
+                          data-slide-to="2"
+                        ></li>
+                      </ol>
+                      <div className="carousel-inner">
+                        <div className="carousel-item active">
+                          <img
+                            src={require("../images/UNC_logo_RGB.png")}
+                            alt="course1"
+                          />
+                          <div className="text-center">
+                            <h5>COMP 110: Introduction to Programming</h5>
+                            <p>
+                              An introduction to programming. Fundamental
+                              programming skills, typically using Java or
+                              JavaScript. Problem analysis and algorithm design.
+                              Students may not receive credit for both COMP 110
+                              and COMP 116. Students may not receive credit for
+                              this course after receiving credit for COMP 116 or
+                              higher. Honors version available
+                            </p>
+                          </div>
+                        </div>
+                        <div className="carousel-item">
+                          <img
+                            src={require("../images/UNC_logo_RGB.png")}
+                            alt="course2"
+                          />
+                          <div className="text-center">
+                            <h5>COMP 210: Data Structures and Analysis</h5>
+                            <p>
+                              This course will teach you how to organize the
+                              data used in computer programs so that
+                              manipulation of that data can be done efficiently
+                              on large problems and large data instances. Rather
+                              than learning to use the data structures found in
+                              the libraries of programming languages, you will
+                              be learning how those libraries are constructed,
+                              and why the items that are included in them are
+                              there(and why some are excluded).
+                            </p>
+                          </div>
+                        </div>
+                        <div className="carousel-item">
+                          <img
+                            src={require("../images/UNC_logo_RGB.png")}
+                            alt="course3"
+                          />
+                          <div className="text-center">
+                            <h5>COMP 211: Systems Fundamentals</h5>
+                            <p>
+                              This is the first course in the introductory
+                              systems sequence. Students enter the course having
+                              taken an introductory programming course in a high
+                              - level programming language(COMP 110) and a
+                              course in discrete structures.The overarching goal
+                              is to bridge the gap between a students' knowledge
+                              of a high-level programming language (COMP 110)
+                              and computer organization (COMP 311).
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <a
+                        className="carousel-control-prev"
+                        href="#carouselIndicators"
+                        role="button"
+                        data-slide="prev"
+                      >
+                        <span
+                          className="carousel-control-prev-icon"
+                          aria-hidden="true"
+                        ></span>
+                        <span className="sr-only">Previous</span>
+                      </a>
+                      <a
+                        className="carousel-control-next"
+                        href="#carouselIndicators"
+                        role="button"
+                        data-slide="next"
+                      >
+                        <span
+                          className="carousel-control-next-icon"
+                          aria-hidden="true"
+                        ></span>
+                        <span className="sr-only">Next</span>
+                      </a>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+          <div className="col-4">
+            <h4>Major Requirements Remaining:</h4>{" "}
+            <div>
+              {userData.user ? (
+                <>
+                  {majorReqLeft().map((course) => (
+                    <Course course={course} />
                   ))}
                 </>
               ) : (
-                  <>
-                    <h5>LOADING...</h5>
-                  </>
-                )}
+                <>
+                  <h5>LOADING...</h5>
+                </>
+              )}
             </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col"></div>
         </div>
       </div>
     </>
