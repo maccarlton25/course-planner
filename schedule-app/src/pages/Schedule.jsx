@@ -10,7 +10,10 @@ import Card from "react-bootstrap/Card";
 const Schedule = () => {
   const { userData, setUserData } = useContext(UserContext);
   const [courses, setCourses] = useState([]);
-  const coursesArr = require("../compclasses.json");
+  const coursesData = require("../compclasses.json");
+  const coursesArr = coursesData.courses.sort((a, b) =>
+    a.code > b.code ? 1 : -1
+  );
 
   useEffect(() => {
     async function fetchData() {
@@ -107,7 +110,7 @@ const Schedule = () => {
   }
 
   function getCourse(num) {
-    return coursesArr.courses.filter((course) => course.code == num);
+    return coursesArr.filter((course) => course.code == num);
   }
 
   function getSuggCourseTitle(course) {
@@ -148,40 +151,9 @@ const Schedule = () => {
     }
   }
 
-  function havePreReqs(input) {
-    let hasPreReqs = [];
-    let userCourses = userData.user.coursesTaken;
-    let preReq = input.prereq;
-    if (preReq.length == 0) {
-      return true;
-    }
-    for (let i = 0; i < preReq.length; i++) {
-      let splitOr = preReq[0].split("|");
-      let splitAnd = [];
-      splitOr.forEach((element) => {
-        splitAnd.push(element.split("&"));
-      });
-      for (let i = 0; i < splitAnd.length; i++) {
-        for (let j = 0; j < splitAnd[i].length; j++) {
-          splitAnd[i][j] = splitAnd[i][j].substring(4);
-        }
-      }
-      for (let i = 0; i < splitAnd.length; i++) {
-        if (userCourses.includes(splitAnd[i][splitAnd[i].length - 1])) {
-          hasPreReqs.push(true);
-        }
-      }
-    }
-    if (hasPreReqs.includes(false) | (hasPreReqs.length == 0)) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   function getSuggestions(first) {
     let userCourses = userData.user.coursesTaken;
-    let notTaken = coursesArr.courses.filter(
+    let notTaken = coursesArr.filter(
       (course) => !userCourses.includes(JSON.stringify(course.code))
     );
     let notTakenHasPR = [];
@@ -206,48 +178,52 @@ const Schedule = () => {
   return (
     <>
       <div className="container">
-        <div className="row">
-          <div className="col-6">
+        <div className="row screen">
+          <div className="col-7">
             <div>
               {userData.user ? (
                 <>
-                  <div className="card-deck">
-                    <div className="card text-white bg-dark mb-3">
-                      <div className="card-header">
-                        Major Requirements Remaining
+                  <div className="row">
+                    <div className="card-deck">
+                      <div className="top card text-white bg-dark mb-3">
+                        <div className="card-header">
+                          Major Requirements Remaining
+                        </div>
+                        <div className="card-body top-bar">
+                          {userData.user ? (
+                            <>
+                              <h2 className="card-text">
+                                {7 -
+                                  userData.user.bsRequired.length -
+                                  majorReqLeft().length}
+                              </h2>
+                              <h2></h2>
+                            </>
+                          ) : (
+                            <>
+                              <h2 className="card-text">0</h2>
+                            </>
+                          )}
+                        </div>
                       </div>
-                      <div className="card-body top-bar">
-                        {userData.user ? (
-                          <>
-                            <h2 className="card-text">
-                              {majorReqLeft().length}
-                            </h2>
-                            <h2></h2>
-                          </>
-                        ) : (
-                          <>
-                            <h2 className="card-text">0</h2>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                    <div className="card text-white bg-dark mb-3">
-                      <div className="card-header">
-                        Major Electives Remaining
-                      </div>
-                      <div className="card-body top-bar">
-                        {userData.user ? (
-                          <>
-                            <h2 className="card-text">
-                              {electivesLeft(false)}
-                            </h2>
-                            <h2></h2>
-                          </>
-                        ) : (
-                          <>
-                            <h2 className="card-text">0</h2>
-                          </>
-                        )}
+                      <div className="top card text-white bg-dark mb-3">
+                        <div className="card-header">
+                          Major Electives Remaining
+                        </div>
+                        <div className="card-body top-bar">
+                          {userData.user ? (
+                            <>
+                              <h2 className="card-text">
+                                {electivesLeft(false)}
+                              </h2>
+                              <h2></h2>
+                            </>
+                          ) : (
+                            <>
+                              <h2 className="card-text">0</h2>
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -438,9 +414,13 @@ const Schedule = () => {
               )}
             </div>
           </div>
-          <div className="col-6">
-            <div>
-              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <div className="col-5">
+            <div className="rightPanel">
+              <ul
+                class="nav nav-pills mb-3 justify-content-center"
+                id="pills-tab"
+                role="tablist"
+              >
                 <li class="nav-item" role="presentation">
                   <a
                     class="nav-link active"
@@ -496,12 +476,55 @@ const Schedule = () => {
                                   <li>
                                     For BS Students:
                                     <ul>
-                                      <li>MATH 231</li>
-                                      <li>MATH 232</li>
-                                      <li>MATH 233</li>
-                                      <li>MATH 347/547</li>
-                                      <li>MATH 116/118</li>
-                                      <li>Second Science Course</li>
+                                      {!userData.user.bsRequired.includes(
+                                        "m231"
+                                      ) && (
+                                        <>
+                                          <li>MATH 231</li>
+                                        </>
+                                      )}
+                                      {!userData.user.bsRequired.includes(
+                                        "m232"
+                                      ) && (
+                                        <>
+                                          <li>MATH 232</li>
+                                        </>
+                                      )}
+                                      {!userData.user.bsRequired.includes(
+                                        "m233"
+                                      ) && (
+                                        <>
+                                          <li>MATH 233</li>
+                                        </>
+                                      )}
+                                      {!userData.user.bsRequired.includes(
+                                        "m347"
+                                      ) && (
+                                        <>
+                                          <li>MATH 347/547</li>
+                                        </>
+                                      )}
+                                      {!userData.user.bsRequired.includes(
+                                        "s435"
+                                      ) && (
+                                        <>
+                                          <li>STOR 435</li>
+                                        </>
+                                      )}
+                                      {!userData.user.bsRequired.includes(
+                                        "p1168"
+                                      ) && (
+                                        <>
+                                          <li>PHYS 116/118</li>
+                                        </>
+                                      )}
+                                      {!userData.user.bsRequired.includes(
+                                        "sci"
+                                      ) && (
+                                        <>
+                                          <li>Second Science Course</li>
+                                        </>
+                                      )}
                                     </ul>
                                   </li>
                                   <li>
