@@ -229,7 +229,11 @@ const Schedule = () => {
                   </div>
                   <div className="card text-white bg-dark mb-3">
                     <div className="card-header">
-                      All the courses you qualify for:
+                      <h5>All the courses you qualify for:</h5>
+                      <p className="desc">
+                        These are all courses that you have the necessary
+                        prerequisites for, but have not taken yet.
+                      </p>
                     </div>
                     <div className="card-body top-bar">
                       <div
