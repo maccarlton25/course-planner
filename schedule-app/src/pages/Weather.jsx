@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../styles/Weather.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import DayCard from './DayCard.jsx';
+const moment = require('moment');
 
 const Weather = () => {
+  const [allData, setAllData] = useState({
+    fullData: [],
+    dailyData: []
+  });
+
   async function getWeather() {
     let response = await fetch('https://api.api.openweathermap.org/data/2.5/weather?q=chapel+hill&appid=a2dca4995be86d6bc8760239ae5b8713');
     let data = await response.json();
     return data;
   }
-
-  let state = {
-    fullData: [],
-    dailyData: []
-  };
+  getWeather();
 
   let componentDidMount = () => {
     const weatherURL =
@@ -23,15 +25,16 @@ const Weather = () => {
       .then(res => res.json())
       .then(data => {
         const dailyData = data.list.filter(reading => reading.dt_txt.includes("18:00:00"))
-        this.setState({
+        setAllData({
           fullData: data.list,
           dailyData: dailyData
         }, () => console.log(this.state))
       })
   }
+  componentDidMount();
 
   let formatDayCards = () => {
-    return this.state.dailyData.map((reading, index) => <DayCard reading={reading} key={index} />)
+    return allData.dailyData.map((reading, index) => <DayCard reading={reading} key={index} />)
   }
 
   return (

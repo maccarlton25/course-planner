@@ -3,8 +3,8 @@ var moment = require('../../node_modules/moment/dist/moment.js');
 
 const DayCard = ({ reading }) => {
   let newDate = new Date();
-  const weekday = reading.dt * 1000
-  newDate.setTime(weekday)
+  const weekday = reading.dt * 1000;
+  newDate.setTime(weekday);
 
   const imgURL = `owf owf-${reading.weather[0].id} owf-5x`
 
