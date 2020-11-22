@@ -82,11 +82,7 @@ const Schedule = () => {
       if (result.length >= 5) {
         output = 0;
       } else {
-        if (userCourses.includes("210")) {
-          output = 6 - result.length;
-        } else {
-          output = 5 - result.length;
-        }
+        output = 5 - result.length;
       }
     } else {
       userCourses.forEach((course) => {
@@ -193,9 +189,21 @@ const Schedule = () => {
                           {userData.user ? (
                             <>
                               <h2 className="card-text">
-                                {7 -
-                                  userData.user.bsRequired.length +
-                                  majorReqLeft().length}
+                                {console.log(userData.user)}
+                                {userData.user.major == "bs" && (
+                                  <>
+                                    {7 -
+                                      userData.user.bsRequired.length +
+                                      majorReqLeft().length}
+                                  </>
+                                )}
+                                {userData.user.major == "ba" && (
+                                  <>
+                                    {2 -
+                                      userData.user.bsRequired.length +
+                                      majorReqLeft().length}
+                                  </>
+                                )}
                               </h2>
                               <h2></h2>
                             </>
@@ -466,6 +474,96 @@ const Schedule = () => {
                         {majorReqLeft().map((course) => (
                           <Course course={course} />
                         ))}
+                        {majorReqLeft().length != 0 && (
+                          <Card>
+                            <Card.Body>
+                              <Card.Subtitle className="mb-2 text-muted">
+                                Don't forget about your additional requirements.
+                              </Card.Subtitle>
+                              <Card.Text>
+                                {userData.user.major == "bs" && (
+                                  <>
+                                    <ul>
+                                      {!userData.user.bsRequired.includes(
+                                        "m231"
+                                      ) && (
+                                        <>
+                                          <li>MATH 231</li>
+                                        </>
+                                      )}
+                                      {!userData.user.bsRequired.includes(
+                                        "m232"
+                                      ) && (
+                                        <>
+                                          <li>MATH 232</li>
+                                        </>
+                                      )}
+                                      {!userData.user.bsRequired.includes(
+                                        "m233"
+                                      ) && (
+                                        <>
+                                          <li>MATH 233</li>
+                                        </>
+                                      )}
+                                      {!userData.user.bsRequired.includes(
+                                        "m347"
+                                      ) && (
+                                        <>
+                                          <li>MATH 347/547</li>
+                                        </>
+                                      )}
+                                      {!userData.user.bsRequired.includes(
+                                        "s435"
+                                      ) && (
+                                        <>
+                                          <li>STOR 435</li>
+                                        </>
+                                      )}
+                                      {!userData.user.bsRequired.includes(
+                                        "p1168"
+                                      ) && (
+                                        <>
+                                          <li>PHYS 116/118</li>
+                                        </>
+                                      )}
+                                      {!userData.user.bsRequired.includes(
+                                        "sci"
+                                      ) && (
+                                        <>
+                                          <li>Second Science Course</li>
+                                        </>
+                                      )}
+                                    </ul>
+                                  </>
+                                )}
+                                {userData.user.major == "ba" && (
+                                  <>
+                                    <ul>
+                                      {!userData.user.bsRequired.includes(
+                                        "m231"
+                                      ) && (
+                                        <>
+                                          <li>MATH 231</li>
+                                        </>
+                                      )}
+                                      {!userData.user.bsRequired.includes(
+                                        "s435"
+                                      ) && (
+                                        <>
+                                          <li>STOR 435</li>
+                                        </>
+                                      )}
+                                      <li>
+                                        Four Additional Electives - see
+                                        registrars website for details
+                                      </li>
+                                    </ul>
+                                  </>
+                                )}
+                              </Card.Text>
+                            </Card.Body>
+                          </Card>
+                        )}
                         {majorReqLeft().length == 0 && (
                           <Card>
                             <Card.Body>
