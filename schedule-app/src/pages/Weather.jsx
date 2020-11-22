@@ -1,7 +1,7 @@
 import React from 'react';
 import "../styles/Weather.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import DayCard from "../components/DayCard";
+import DayCard from './DayCard.jsx';
 
 const Weather = () => {
     
@@ -40,8 +40,9 @@ const Weather = () => {
             </div>
             </div>
         </div>
-        </>
-    )
+      
+    </>
+  )
 }
 
 export default Weather;
