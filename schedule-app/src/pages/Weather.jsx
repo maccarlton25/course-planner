@@ -1,7 +1,7 @@
 import React from 'react';
 import "../styles/Weather.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import DayCard from './DayCard.jsx';
+import DayCard from '../components/DayCard.jsx';
 
 const Weather = () => {
     

@@ -1,6 +1,6 @@
 import React from 'react';
 import Moment from 'react-moment';
-
+import "../../node_modules/owfont-master/css/owfont-regular.css";
 const DayCard = (props) => {
   let newDate = new Date();
   const weekday = props.dt * 1000
