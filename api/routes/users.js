@@ -96,10 +96,12 @@ router.put("/update", async (req, res) => {
 
 });
 
-router.delete("/delete", auth, async (req, res) => {
+router.delete("/delete", async (req, res) => {
+    console.log(req.body);
     try {
-        const deletedUser = await User.findByIdAndDelete(req.user);
+        const deletedUser = await User.findByIdAndDelete(req.body.id);
         res.json(deletedUser);
+        //console.log(deletedUser);
     } catch (err) {
         res.status(500).json(err);
     }

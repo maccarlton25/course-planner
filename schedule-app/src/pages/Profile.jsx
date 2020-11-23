@@ -25,20 +25,27 @@ const Profile = () => {
         fetchData();
     }, []);
 
-    const handleSubmit = async(e) => {
+    const handleDelete = async (e) => {
+        console.log(userData);
+        e.preventDefault();
+        await Axios.delete("http://localhost:9000/users/delete", {data: {id: userData.user.id}});
+        setUserData({
+            token: undefined,
+            user: undefined
+        })
+        localStorage.clear();
+        history.push("/login");
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const url = "http://localhost:9000/users/" + userData.user.id;
-        console.log("url: "+url);
         const user = { majorType, coursesTaken, bsRequired, semRem };
         const updateRes = await Axios.put(url, user);
         setUserData({
             token: userData.token,
             user: updateRes.data.user,
         });
-        console.log("userData");
-        console.log(userData);
-        console.log("updateRes.data");
-        console.log(updateRes.data);
         history.push("/");
         window.location.reload(false);
     }
@@ -125,9 +132,18 @@ const Profile = () => {
                                     If you are a BA student, do not select any option.  Hold CMD or CTRL to select multiple courses.
                         </Form.Text>
                             </Form.Group>
-                            
+
                         </Col>
                         <Button block size="lg" type="submit"> Update Profile </Button>
+                    </Form.Row>
+                    <br></br>
+                    <Form.Row>
+                        <Col><Button block size="lg" type="submit" variant="danger" onClick={handleDelete}> Delete Profile </Button></Col>
+                        <Col>
+                            <Form.Text >
+                                This will delete your profile completely. This action is irreversible.
+                        </Form.Text>
+                        </Col>
                     </Form.Row>
 
 

@@ -56,7 +56,6 @@ app.get("/courses/:id", (request, response) => {
 // ex. $ curl http://localhost:9000/items
 // ->JSON array of collection documents
 app.get("/courses", (request, response) => {
-    console.log("get item list");
     // return updated list
     courseCollection.find().toArray((error, result) => {
         if (error) throw error;

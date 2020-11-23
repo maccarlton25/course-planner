@@ -57,7 +57,12 @@ const NavbarContainer = () => {
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/weather" component={Weather} />
                 <Route exact path="/catalog" component={Catalog} />
-                <Route exact path="/profile" component={Profile} />
+                
+                { userData.user ? (
+                    <Route exact path="/profile" component={Profile} />
+                ) : (
+                    <Route exact path="/profile" component={Login} />
+                )}
             </Switch>
         </>
     )

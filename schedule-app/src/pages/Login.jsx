@@ -33,6 +33,9 @@ const Login = () => {
         <>
         <div className="jumbotron" style={{ textAlign: "center" }}>
           <h1 className="display-4">- Log in to your Scheduler - </h1>
+          <p className="lead">
+                    Don't have an account? <a href="/signup">Sign up!</a>
+                </p>
         </div>
         <div className="Login">
             <Form onSubmit={handleSubmit}>
