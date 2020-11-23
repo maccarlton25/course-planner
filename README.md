@@ -9,19 +9,19 @@ Backend (found in API folder)
 
 ## Key Features
 
-### User account saves major type, estimated graduation date, and previous courses taken.
+User account saves major type, estimated graduation date, and previous courses taken.
 
-### Application keeps track of remaining major and elective requirements
+Application keeps track of remaining major and elective requirements
 
-### Based on previous classes taken and remaining requirements, users are presented with suggestions for future courses.
+Based on previous classes taken and remaining requirements, users are presented with suggestions for future courses.
 
-### Users can update their settings at anytime, ensuring the tool is helpful throughout their entire UNC career.
+Users can update their settings at anytime, ensuring the tool is helpful throughout their entire UNC career.
 
 ## How to Run Locally
 
-### Within the API directory, run 'npm start' to initialize the back-end
+Within the API directory, run `npm start` to initialize the back-end
 
-### Within the Schedule-App directory, run 'npm start' to initialize the front-end
+Within the Schedule-App directory, run `npm start` to initialize the front-end
 
 ## Schedule-App Available Scripts (Front-End)
 
@@ -57,5 +57,3 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-# You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
