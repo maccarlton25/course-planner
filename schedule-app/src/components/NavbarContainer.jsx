@@ -7,7 +7,7 @@ import About from '../pages/About.jsx';
 import Login from '../pages/Login.jsx';
 import Schedule from '../pages/Schedule.jsx';
 import Signup from '../pages/Signup.jsx';
-import Weather from '../pages/Weather.jsx';
+import Weather from '../Weather.js';
 import Catalog from '../pages/Catalog.jsx';
 import Profile from '../pages/Profile.jsx';
 import { useHistory } from "react-router-dom";
