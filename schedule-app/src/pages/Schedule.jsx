@@ -67,6 +67,17 @@ const Schedule = () => {
     return result;
   }
 
+  function baOtherReq() {
+    let result = 2;
+    if (userData.user.bsRequired.includes("m231")) {
+      result--;
+    }
+    if (userData.user.bsRequired.includes("s435")) {
+      result--;
+    }
+    return result;
+  }
+
   function electivesLeft(taken) {
     let userCourses = userData.user.coursesTaken;
     let result = [];
@@ -198,11 +209,7 @@ const Schedule = () => {
                                   </>
                                 )}
                                 {userData.user.major == "ba" && (
-                                  <>
-                                    {2 -
-                                      userData.user.bsRequired.length +
-                                      majorReqLeft().length}
-                                  </>
+                                  <>{majorReqLeft().length + baOtherReq()}</>
                                 )}
                               </h2>
                               <h2></h2>
