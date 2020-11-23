@@ -40,6 +40,7 @@ const Profile = () => {
         console.log("updateRes.data");
         console.log(updateRes.data);
         history.push("/");
+        window.location.reload(false);
     }
 
     return (
