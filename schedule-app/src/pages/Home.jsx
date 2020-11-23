@@ -191,7 +191,6 @@ const Home = () => {
     for (let i = 0; i < index; i++) {
       suggArr.push(notTakenHasPR[getRandomInt(notTakenHasPR.length)]);
     }
-    console.log(suggArr);
     return suggArr;
   }
 
@@ -200,7 +199,6 @@ const Home = () => {
   }
 
   function getCourseTitle(course) {
-    console.log(course);
     if (course.code == 581) {
       return "COMP 581: Introduction to Robotics";
     }

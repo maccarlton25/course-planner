@@ -200,7 +200,6 @@ const Schedule = () => {
                           {userData.user ? (
                             <>
                               <h2 className="card-text">
-                                {console.log(userData.user)}
                                 {userData.user.major == "bs" && (
                                   <>
                                     {7 -
