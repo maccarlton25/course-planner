@@ -3,7 +3,12 @@
 ## Project Overview
 
 UNC Schedule Planner is a tool aimed to simplify the course selection process for Computer Science students at UNC Chapel Hill.
-This project was built on a MERN (MongoDB, Express, React, Node.js) stack. Below we will document the components of this project:
+
+This project was built on a MERN (MongoDB, Express, React, Node.js) stack.
+
+The front end and back end are hosted separately using Heroku.
+
+Current course data and user data are stored using MongoDB Atlas.
 
 ## Key Features
 
