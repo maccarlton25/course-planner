@@ -303,7 +303,7 @@ const Home = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-9">
+          <div className="col-md-9">
             <div className="card text-white bg-dark mb-3">
               {userData.user ? (
                 <>
@@ -484,7 +484,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="col-3">
+          <div className="col-md-3">
             <div className="card text-white bg-dark mb-3">
               <div className="card-header">Recent Courses</div>
               <div className="card-body top-bar">
