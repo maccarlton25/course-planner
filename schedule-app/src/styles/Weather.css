@@ -1,7 +1,10 @@
 .star {
-    background-image: url('../images/space.jpg');
+    background-image: url('../images/clouds.jpg');
 }
 
 h1 {
     color: white;
+    -webkit-text-stroke: black;
+    -webkit-text-stroke-width: .5px;
+    font-weight: bold;
 }
