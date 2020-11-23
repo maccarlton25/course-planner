@@ -29,7 +29,7 @@ class WeekContainer extends React.Component {
     return (
         <div className="container-fluid">
         <div className="jumbotron star" style={{ textAlign: "center" }}>
-        <h1 className="display-4">Chapel Hill, NC Forecast</h1>
+        <h1 className="display-4 weatherHeader">Chapel Hill, NC Forecast</h1>
         <div className="row justify-content-center">
           {this.formatDayCards()}
         </div>

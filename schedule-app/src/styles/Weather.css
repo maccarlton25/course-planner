@@ -2,9 +2,7 @@
     background-image: url('../images/clouds.jpg');
 }
 
-h1 {
+.weatherHeader {
     color: white;
-    -webkit-text-stroke: black;
-    -webkit-text-stroke-width: .5px;
     font-weight: bold;
 }
