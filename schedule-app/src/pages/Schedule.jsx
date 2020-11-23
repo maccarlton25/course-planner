@@ -186,7 +186,7 @@ const Schedule = () => {
     <>
       <div className="container">
         <div className="row screen">
-          <div className="col-7">
+          <div className="col-md-7">
             <div>
               {userData.user ? (
                 <>
@@ -433,7 +433,7 @@ const Schedule = () => {
               )}
             </div>
           </div>
-          <div className="col-5">
+          <div className="col-md-5">
             <div className="rightPanel">
               <ul
                 class="nav nav-pills mb-3 justify-content-center"
