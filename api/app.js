@@ -99,17 +99,17 @@ db.initialize(dbName2, collectionName2, function(dbCollection) { // successCallb
 // ex: $ curl -X POST -H "Content-Type: application/json" --data '{"id": "tt0109830", "name": "Forrest
 // Gump", "genre": "drama"}' http://localhost:9000/items
 
-app.post("/users", (request, response) => {
-    const item = request.body;
-    userCollection.insertOne(item, (error, result) => { // callback of insertOne
-        if (error) throw error;
-        // return updated list
-        userCollection.find().toArray((_error, _result) => { // callback of find
-            if (_error) throw _error;
-            response.json(_result);
-        });
-    });
-});
+// app.post("/users", (request, response) => {
+//     const item = request.body;
+//     userCollection.insertOne(item, (error, result) => { // callback of insertOne
+//         if (error) throw error;
+//         // return updated list
+//         userCollection.find().toArray((_error, _result) => { // callback of find
+//             if (_error) throw _error;
+//             response.json(_result);
+//         });
+//     });
+// });
 
 // update collection document
 // ex: curl -X PUT -H "Content-Type: application/json" --data '{"qty": 200}' http://localhost:9000/items/canvas2
@@ -139,7 +139,6 @@ app.put("/users/:id", async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-    
 });
 
 // delete document from collection
@@ -166,7 +165,6 @@ app.delete("/users/:id", (request, response) => {
 // ->JSON object matching the id
 app.get("/users/:id", (request, response) => {
     const itemId = request.params.id;
-
     userCollection.findOne({ username: itemId }, (error, result) => {
         if (error) throw error;
         // return item
@@ -190,7 +188,6 @@ app.get("/users", (request, response) => {
 
 // mongoose setup
 mongoose.connect('mongodb+srv://testuser:TestUser123@cluster0.bvyym.mongodb.net/course_data?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, (err) => {
-    console.log('connection in progress');
     if (err) throw err;
     else console.log('mongodb connection successful');
 });

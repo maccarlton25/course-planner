@@ -47,7 +47,7 @@ User API:
   - CURL ex.: curl -X POST -H "Content-Type: application/json" --data
   - '{"name": "Mac Carlton", "username": "maccarlton", "password": "mac123", "courses_taken": ["110", "410", "411", "426"]}' https://unc-schedule-backend.herokuapp.com/users
   - Returns: updated list of all users
-- Update a users courses taken:
+- Update a users information:
   - url: https://unc-schedule-backend.herokuapp.com/users
   - type PUT
   - CURL ex.: curl -X PUT -H "Content-Type: application/json" --data

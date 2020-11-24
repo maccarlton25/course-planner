@@ -10,6 +10,7 @@ const auth = require("../models/auth.js");
 //     res.send("respond with a resource");
 // });
 
+// used to sign up users
 router.post('/register', async (req, res) => {
     try {
         let { email, password, passwordCheck, displayName, majorType, coursesTaken, bsRequired, semRem } = req.body;
@@ -49,6 +50,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
+// log in user
 router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -80,6 +82,7 @@ router.post("/login", async (req, res) => {
     }
 });
 
+// update user info (not used)
 router.put("/update", async (req, res) => {
     try {
         const user = await User.findById(itemId);
@@ -93,9 +96,9 @@ router.put("/update", async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-
 });
 
+// delete use
 router.delete("/delete", async (req, res) => {
     console.log(req.body);
     try {
@@ -107,6 +110,7 @@ router.delete("/delete", async (req, res) => {
     }
 });
 
+// check jwt
 router.post("/tokenIsValid", async (req, res) => {
     try {
         const token = req.header("x-auth-token");
@@ -124,20 +128,8 @@ router.post("/tokenIsValid", async (req, res) => {
     }
 });
 
+// get user by id
 router.get("/", auth, async (req, res) => {
-    const user = await User.findById(req.user);
-    res.json({
-        id: user._id,
-        displayName: user.displayName,
-        email: user.email,
-        coursesTaken: user.coursesTaken,
-        bsRequired: user.bsRequired,
-        major: user.majorType,
-        semRem: user.semRem
-    });
-});
-
-router.get("/profile", auth, async (req, res) => {
     const user = await User.findById(req.user);
     res.json({
         id: user._id,
