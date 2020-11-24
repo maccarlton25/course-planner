@@ -48,20 +48,21 @@ User API:
   - '{"name": "Mac Carlton", "username": "maccarlton", "password": "mac123", "courses_taken": ["110", "410", "411", "426"]}' https://unc-schedule-backend.herokuapp.com/users
   - Returns: updated list of all users
 - Update a users information:
-  - url: https://unc-schedule-backend.herokuapp.com/users
+  - url: https://unc-schedule-backend.herokuapp.com/users/{id}
   - type PUT
   - CURL ex.: curl -X PUT -H "Content-Type: application/json" --data
   - '{"courses_taken": {updatedArray}]' https://unc-schedule-backend.herokuapp.com/users
-  - Returns a updated JSON array of all users
+  - Returns updated JSON for updated user
 - Get a list of all users:
   - url: https://unc-schedule-backend.herokuapp.com/users
   - type GET
   - Returns: JSON Array of all users
 - Get a specific user:
-  - url: https://unc-schedule-backend.herokuapp.com/users/{username}
+  - url: https://unc-schedule-backend.herokuapp.com/users/{id}
   - type GET
   - Returns: JSON Object of user
 - Delete a user:
-  - url: https://unc-schedule-backend.herokuapp.com/users/{username}
+  - url: https://unc-schedule-backend.herokuapp.com/users/delete
   - type DELETE
+  - body includes user's ID
   - Returns: Updated array of users
